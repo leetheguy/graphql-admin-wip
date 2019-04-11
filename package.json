@@ -1,0 +1,38 @@
+{
+  "name": "magic-admin",
+  "private": true,
+  "version": "0.0.1",
+  "description": "magic-admin",
+  "license": "MIT",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "stencil build",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watch"
+  },
+  "dependencies": {
+    "@ionic/core": "4.0.0",
+    "axios": "^0.18.0",
+    "flatpickr": "^4.5.7",
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0",
+    "quill": "^1.3.6",
+    "redux": "^4.0.1",
+    "rxjs": "^6.4.0"
+  },
+  "devDependencies": {
+    "@stencil/core": "^0.18.1",
+    "@stencil/router": "^0.3.3",
+    "@types/jest": "23.3.14",
+    "@types/lodash": "^4.14.123",
+    "@types/puppeteer": "1.12.3",
+    "jest": "23.6.0",
+    "jest-cli": "23.6.0",
+    "puppeteer": "1.11.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.4.0"
+  }
+}

@@ -1,0 +1,280 @@
+- args:
+    name: strain
+    table:
+      name: biomass_inventory
+      schema: public
+    using:
+      foreign_key_constraint_on: strain_id
+  type: create_object_relationship
+- args:
+    name: supplier
+    table:
+      name: biomass_inventory
+      schema: public
+    using:
+      foreign_key_constraint_on: supplier_id
+  type: create_object_relationship
+- args:
+    name: runs
+    table:
+      name: biomass_inventory
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: biomass_id
+        table:
+          name: runs
+          schema: public
+  type: create_array_relationship
+- args:
+    name: concentrate_sales
+    table:
+      name: concentrate_inventory
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: concentrate_inventory_id
+        table:
+          name: concentrate_sales
+          schema: public
+  type: create_array_relationship
+- args:
+    name: concentrate_inventory
+    table:
+      name: concentrate_sales
+      schema: public
+    using:
+      foreign_key_constraint_on: concentrate_inventory_id
+  type: create_object_relationship
+- args:
+    name: contact
+    table:
+      name: concentrate_sales
+      schema: public
+    using:
+      foreign_key_constraint_on: contact_id
+  type: create_object_relationship
+- args:
+    name: concentrate_sales
+    table:
+      name: contacts
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: contact_id
+        table:
+          name: concentrate_sales
+          schema: public
+  type: create_array_relationship
+- args:
+    name: employees
+    table:
+      name: contacts
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: contact_id
+        table:
+          name: employees
+          schema: public
+  type: create_array_relationship
+- args:
+    name: suppliers
+    table:
+      name: contacts
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: contact_id
+        table:
+          name: suppliers
+          schema: public
+  type: create_array_relationship
+- args:
+    name: employee
+    table:
+      name: employee_hours
+      schema: public
+    using:
+      foreign_key_constraint_on: employee_id
+  type: create_object_relationship
+- args:
+    name: employee
+    table:
+      name: employee_notes
+      schema: public
+    using:
+      foreign_key_constraint_on: id
+  type: create_object_relationship
+- args:
+    name: employee
+    table:
+      name: employee_payroll
+      schema: public
+    using:
+      foreign_key_constraint_on: employee_id
+  type: create_object_relationship
+- args:
+    name: contact
+    table:
+      name: employees
+      schema: public
+    using:
+      foreign_key_constraint_on: contact_id
+  type: create_object_relationship
+- args:
+    name: employee_hours
+    table:
+      name: employees
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: employee_id
+        table:
+          name: employee_hours
+          schema: public
+  type: create_array_relationship
+- args:
+    name: employee_notes
+    table:
+      name: employees
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: id
+        table:
+          name: employee_notes
+          schema: public
+  type: create_array_relationship
+- args:
+    name: employee_payrolls
+    table:
+      name: employees
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: employee_id
+        table:
+          name: employee_payroll
+          schema: public
+  type: create_array_relationship
+- args:
+    name: runs
+    table:
+      name: employees
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: employee_id
+        table:
+          name: runs
+          schema: public
+  type: create_array_relationship
+- args:
+    name: run_column
+    table:
+      name: extractions
+      schema: public
+    using:
+      foreign_key_constraint_on: column_id
+  type: create_object_relationship
+- args:
+    name: supplier
+    table:
+      name: purchases
+      schema: public
+    using:
+      foreign_key_constraint_on: supplier_id
+  type: create_object_relationship
+- args:
+    name: run
+    table:
+      name: run_columns
+      schema: public
+    using:
+      foreign_key_constraint_on: run_id
+  type: create_object_relationship
+- args:
+    name: extractions
+    table:
+      name: run_columns
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: column_id
+        table:
+          name: extractions
+          schema: public
+  type: create_array_relationship
+- args:
+    name: biomass_inventory
+    table:
+      name: runs
+      schema: public
+    using:
+      foreign_key_constraint_on: biomass_id
+  type: create_object_relationship
+- args:
+    name: employee
+    table:
+      name: runs
+      schema: public
+    using:
+      foreign_key_constraint_on: employee_id
+  type: create_object_relationship
+- args:
+    name: run_columns
+    table:
+      name: runs
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: run_id
+        table:
+          name: run_columns
+          schema: public
+  type: create_array_relationship
+- args:
+    name: biomass_inventories
+    table:
+      name: strains
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: strain_id
+        table:
+          name: biomass_inventory
+          schema: public
+  type: create_array_relationship
+- args:
+    name: contact
+    table:
+      name: suppliers
+      schema: public
+    using:
+      foreign_key_constraint_on: contact_id
+  type: create_object_relationship
+- args:
+    name: biomass_inventories
+    table:
+      name: suppliers
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: supplier_id
+        table:
+          name: biomass_inventory
+          schema: public
+  type: create_array_relationship
+- args:
+    name: purchases
+    table:
+      name: suppliers
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: supplier_id
+        table:
+          name: purchases
+          schema: public
+  type: create_array_relationship

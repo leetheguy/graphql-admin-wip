@@ -1,0 +1,115 @@
+- args:
+    cascade: false
+    sql: |
+      delete from employee_payroll where true = true;
+      ALTER SEQUENCE employee_payroll_id_seq RESTART WITH 1;
+
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (13, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (94, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (60, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (63, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (62, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (19, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (5, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (77, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (88, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (71, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (77, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (18, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (84, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (66, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (22, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (28, null, null, 'Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.');
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (69, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (81, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (14, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (5, null, null, 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.');
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (43, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (95, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (57, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (29, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (21, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (73, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (61, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (98, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (26, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (80, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (19, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (16, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (65, null, null, 'Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.
+
+      Sed ante. Vivamus tortor. Duis mattis egestas metus.
+
+      Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.');
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (35, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (2, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (20, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (100, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (75, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (53, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (88, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (23, 44.4, null, 'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.');
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (92, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (72, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (4, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (56, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (79, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (40, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (36, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (52, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (60, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (84, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (72, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (37, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (71, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (94, 44.82, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (97, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (100, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (65, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (84, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (68, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (10, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (47, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (52, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (18, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (53, null, null, 'Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.
+
+      Sed ante. Vivamus tortor. Duis mattis egestas metus.
+
+      Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.');
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (61, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (18, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (71, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (78, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (51, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (41, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (52, 47.44, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (12, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (5, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (4, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (63, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (34, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (17, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (3, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (39, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (47, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (64, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (77, null, 12.02, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (92, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (60, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (46, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (74, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (57, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (15, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (39, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (5, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (87, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (41, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (61, null, null, 'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.');
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (65, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (37, 31.11, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (94, null, null, 'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.');
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (53, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (95, null, null, null);
+      insert into employee_payroll (employee_id, bonus, deduction, notes) values (76, null, null, null);
+  type: run_sql

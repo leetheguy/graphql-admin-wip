@@ -1,0 +1,244 @@
+- args:
+    cascade: false
+    sql: |-
+      CREATE TABLE "gqa_tables" (
+        "dataName" text primary key,
+        "fields" jsonb,
+        "pluralName" text,
+        "singularName" text
+      );
+
+      CREATE TABLE "biomass_inventory" (
+        "id" serial primary key,
+        "date_received" timestamptz,
+        "supplier_id" int,
+        "strain_id" int,
+        "quality" int,
+        "quantity" numeric,
+        "quantity_units" text,
+        "cost" numeric,
+        "code" int,
+        "photo" text,
+        "notes" text
+      );
+
+      CREATE TABLE "suppliers" (
+        "id" serial primary key,
+        "name" text,
+        "website" text,
+        "contact_id" int
+      );
+
+      CREATE TABLE "strains" (
+        "id" serial primary key,
+        "name" text,
+        "notes" text
+      );
+
+      CREATE TABLE "runs" (
+        "id" serial primary key,
+        "date" timestamptz,
+        "type" text,
+        "types" text,
+        "biomass_id" int,
+        "yield" int,
+        "yield_units" text,
+        "employee_id" int,
+        "notes" text
+      );
+
+      CREATE TABLE "run_columns" (
+        "id" serial primary key,
+        "run_id" int,
+        "column_number" int,
+        "weight" int,
+        "weight_units" text,
+        "code" text,
+        "type" text
+      );
+
+      CREATE TABLE "extractions" (
+        "id" serial primary key,
+        "column_id" int,
+        "start_time" timestamptz,
+        "of_time" timestamptz,
+        "lock_time" timestamptz,
+        "flush_time" timestamptz,
+        "evaporation_time" timestamptz,
+        "end_time" timestamptz,
+        "photo" text
+      );
+
+      CREATE TABLE "concentrate_inventory" (
+        "id" serial primary key,
+        "date" timestamptz,
+        "strain" text,
+        "type" text,
+        "grade" text,
+        "percent" int,
+        "quantity" numeric,
+        "quantity_units" text,
+        "price" numeric
+      );
+
+      CREATE TABLE "concentrate_sales" (
+        "id" serial primary key,
+        "concentrate_inventory_id" int,
+        "quantity" numeric,
+        "quantity_units" text,
+        "price" numeric,
+        "contact_id" int,
+        "notes" text
+      );
+
+      CREATE TABLE "employees" (
+        "id" serial primary key,
+        "contact_id" int,
+        "hourly_wage" numeric,
+        "salary" numeric,
+        "photo" text
+      );
+
+      CREATE TABLE "employee_payroll" (
+        "id" serial primary key,
+        "employee_id" int,
+        "bonus" numeric,
+        "deduction" numeric,
+        "notes" text
+      );
+
+      CREATE TABLE "employee_hours" (
+        "id" serial primary key,
+        "employee_id" int,
+        "in" timestamptz,
+        "out" timestamptz
+      );
+
+      CREATE TABLE "employee_notes" (
+        "id" serial primary key,
+        "employee_id" int,
+        "date" timestamptz,
+        "note" text
+      );
+
+      CREATE TABLE "purchases" (
+        "id" serial primary key,
+        "supplier_id" int,
+        "name" text,
+        "quantity" numeric,
+        "quantity_units" text,
+        "cost" numeric,
+        "notes" text
+      );
+
+      CREATE TABLE "expendable_inventory" (
+        "id" serial primary key,
+        "name" text,
+        "quantity" numeric,
+        "quantity_units" text,
+        "notes" text
+      );
+
+      CREATE TABLE "contacts" (
+        "id" serial primary key,
+        "first_name" text,
+        "last_name" text,
+        "mobile_phone" text,
+        "other_phone" text,
+        "email" text,
+        "website" text,
+        "notes" text
+      );
+
+      ALTER TABLE "biomass_inventory" ADD FOREIGN KEY ("supplier_id") REFERENCES "suppliers" ("id");
+
+      ALTER TABLE "biomass_inventory" ADD FOREIGN KEY ("strain_id") REFERENCES "strains" ("id");
+
+      ALTER TABLE "runs" ADD FOREIGN KEY ("biomass_id") REFERENCES "biomass_inventory" ("id");
+
+      ALTER TABLE "run_columns" ADD FOREIGN KEY ("run_id") REFERENCES "runs" ("id");
+
+      ALTER TABLE "extractions" ADD FOREIGN KEY ("column_id") REFERENCES "run_columns" ("id");
+
+      ALTER TABLE "concentrate_sales" ADD FOREIGN KEY ("concentrate_inventory_id") REFERENCES "concentrate_inventory" ("id");
+
+      ALTER TABLE "runs" ADD FOREIGN KEY ("employee_id") REFERENCES "employees" ("id");
+
+      ALTER TABLE "employee_hours" ADD FOREIGN KEY ("employee_id") REFERENCES "employees" ("id");
+
+      ALTER TABLE "employee_payroll" ADD FOREIGN KEY ("employee_id") REFERENCES "employees" ("id");
+
+      ALTER TABLE "employee_notes" ADD FOREIGN KEY ("id") REFERENCES "employees" ("id");
+
+      ALTER TABLE "employees" ADD FOREIGN KEY ("contact_id") REFERENCES "contacts" ("id");
+
+      ALTER TABLE "concentrate_sales" ADD FOREIGN KEY ("contact_id") REFERENCES "contacts" ("id");
+
+      ALTER TABLE "suppliers" ADD FOREIGN KEY ("contact_id") REFERENCES "contacts" ("id");
+
+      ALTER TABLE "purchases" ADD FOREIGN KEY ("supplier_id") REFERENCES "suppliers" ("id");
+  type: run_sql
+- args:
+    name: gqa_tables
+    schema: public
+  type: add_existing_table_or_view
+- args:
+    name: biomass_inventory
+    schema: public
+  type: add_existing_table_or_view
+- args:
+    name: suppliers
+    schema: public
+  type: add_existing_table_or_view
+- args:
+    name: strains
+    schema: public
+  type: add_existing_table_or_view
+- args:
+    name: runs
+    schema: public
+  type: add_existing_table_or_view
+- args:
+    name: run_columns
+    schema: public
+  type: add_existing_table_or_view
+- args:
+    name: extractions
+    schema: public
+  type: add_existing_table_or_view
+- args:
+    name: concentrate_inventory
+    schema: public
+  type: add_existing_table_or_view
+- args:
+    name: concentrate_sales
+    schema: public
+  type: add_existing_table_or_view
+- args:
+    name: employees
+    schema: public
+  type: add_existing_table_or_view
+- args:
+    name: employee_payroll
+    schema: public
+  type: add_existing_table_or_view
+- args:
+    name: employee_hours
+    schema: public
+  type: add_existing_table_or_view
+- args:
+    name: employee_notes
+    schema: public
+  type: add_existing_table_or_view
+- args:
+    name: purchases
+    schema: public
+  type: add_existing_table_or_view
+- args:
+    name: expendable_inventory
+    schema: public
+  type: add_existing_table_or_view
+- args:
+    name: contacts
+    schema: public
+  type: add_existing_table_or_view
