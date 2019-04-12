@@ -28,12 +28,12 @@ export class FormComponent {
     if(this.model.item) {
       this.data = this.model.item
     } else {
-      this.data = this.model.getEmptyData();
-      this.appState.store.dispatch({
-        type: 'set_left_model',
-        model: this.data,
-        id: null,
-      });
+      // this.data = this.model.getEmptyData();
+      // this.appState.store.dispatch({
+      //   type: 'set_left_model',
+      //   model: this.data,
+      //   id: null,
+      // });
     }
     this.editing = !!this.data.id;
 

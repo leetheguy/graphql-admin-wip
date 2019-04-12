@@ -1,7 +1,7 @@
 import { Component } from '@stencil/core';
 import _ from 'lodash';
 import { GQAWebService } from './utils/GQAWebService';
-import { GQANavigation } from './utils/GQANavigation';
+import { GQADataNav } from './utils/GQANavigation';
 import { GQAAppState } from './utils/GQAAppState';
 
 @Component({
@@ -11,7 +11,7 @@ import { GQAAppState } from './utils/GQAAppState';
 export class AdminPage {
   appState: GQAAppState;
   webService: GQAWebService;
-  navigation: GQANavigation;
+  navigation: GQADataNav;
 
   leftColumn = null;
   rightColumn = null;
@@ -21,28 +21,12 @@ export class AdminPage {
     this.webService = this.currentState.webService;
 
     await this.webService.init();
-    this.navigation = new GQANavigation(this.appState);
-    await this.navigation.buildPageFromUrl();
+    this.navigation = new GQADataNav(this.appState);
+    await this.navigation.buildDataFromUrl();
   }
 
-  /*
-   * URL expected structure
-   * table name / id / relationship name / relationship id
-   * clients/
-   *   left side shows create form and list table; no right side
-   * clients/3
-   *   left side shows edit form and list table; no right side
-   * clients/3/contacts
-   *   left side shows edit form and list table; right side shows create child form and select table
-   * clients/3/contacts/5
-   *   left side shows edit form and list table; right side shows edit child form and select table
-   * clients/contacts/
-   *   left side shows create form and list table; right side shows create child form and select table
-   * clients/contacts/5
-   *   left side shows create form and list table; right side shows edit child form and select table
-   */ 
-
   render() {
+    this.navigation.rebuildUrl();
 
     // let content = 
     //   <ion-grid>

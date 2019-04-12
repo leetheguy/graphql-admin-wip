@@ -15,16 +15,16 @@ export class GQAAppState {
     return state;
   }
 
-  models(state = [{}], action) {
+  models(state = [], action) {
     switch (action.type) {
       case 'push_model':
-        state.push(action.model)
-        return action.model;
+        state = _.concat(state, action.model)
+        break;
       case 'pop_model':
-        state.pop();
-        return null;
-      default: return state;
+        state = _.dropRight(state, action.model)
+        break;
     }
+    return state;
   }
 
   // rightModel(state = {}, action) {
@@ -53,7 +53,7 @@ export class GQAAppState {
 
   rootReducer: Reducer = combineReducers({
     webService: this.webService,
-    model: this.models,
+    models: this.models,
     // browserMode:         this.browserMode,
     // developerMode:       this.developerMode,
     // appBooting:       this.appBooting,

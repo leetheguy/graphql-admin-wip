@@ -10,6 +10,7 @@ export class AppRoot {
     return (
       <ion-app>
         <ion-router useHash={false}>
+          <ion-route url="gqa-admin/" component="gqa-admin-page" />
           <ion-route url="gqa-admin/:anything" component="gqa-admin-page" />
         </ion-router>
         <ion-nav />

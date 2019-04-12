@@ -2,7 +2,6 @@ import { Component } from '@stencil/core';
 
 @Component({
   tag: 'gqa-admin-menu',
-  styleUrl: 'admin-menu.css'
 })
 export class AdminMenu {
   render() {

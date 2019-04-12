@@ -9,13 +9,13 @@ export class GQAModel {
   table: GQATable;
 
   list: any = null;
-  item: any = null;
+  item: any = {};
 
   constructor(appState: GQAAppState, table: GQATable) {
     this.appState = appState;
     this.webService = this.currentState.webService;
     this.table = table;
-    this.item = this.getEmptyData;
+    // this.item = this.getEmptyData();
   }
 
   async getListData() {
@@ -26,6 +26,7 @@ export class GQAModel {
   }
 
   getEmptyData() {
+    console.info('killing data')
     let empty = {};
     _.each(this.table.fields, field => {
       empty[field.dataName] = null;
@@ -36,8 +37,13 @@ export class GQAModel {
 
   async getItemData(id: any) {
     await this.webService.runItemQuery(this.table, id)
-    .then(result => this.item = result.data.data[this.table.dataName][0])
+    .then(result =>
+      this.item = result.data.data[this.table.dataName].length > 0
+      ? result.data.data[this.table.dataName][0]
+      : this.item
+    )
     .catch(error => console.error(error));
+    console.info('get item ', this.item)
     return this.item;
   }
 

@@ -22,10 +22,10 @@ export class MainView {
   async componentWillLoad() {
     if(this.side == 'left') {
       this.model = this.currentState.leftModel;
-      if(this.currentState.leftId) await this.model.getItemData(this.currentState.leftId);
+      // if(this.currentState.leftId) await this.model.getItemData(this.currentState.leftId);
     } else {
       this.model = this.currentState.rightModel;
-      if(this.currentState.rightId) await this.model.getItemData(this.currentState.rightId);
+      // if(this.currentState.rightId) await this.model.getItemData(this.currentState.rightId);
     }
   }
 
