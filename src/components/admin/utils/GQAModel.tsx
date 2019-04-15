@@ -15,7 +15,7 @@ export class GQAModel {
     this.appState = appState;
     this.webService = this.currentState.webService;
     this.table = table;
-    // this.item = this.getEmptyData();
+    this.item = this.getEmptyData();
   }
 
   async getListData() {
@@ -26,10 +26,11 @@ export class GQAModel {
   }
 
   getEmptyData() {
-    console.info('killing data')
     let empty = {};
     _.each(this.table.fields, field => {
-      empty[field.dataName] = null;
+      empty[field.dataName] = field.inputType == 'table'
+      ? '{ id: null }'
+      : null;
     });
     _.unset(empty, 'id');
     return empty
@@ -43,7 +44,6 @@ export class GQAModel {
       : this.item
     )
     .catch(error => console.error(error));
-    console.info('get item ', this.item)
     return this.item;
   }
 

@@ -11,23 +11,11 @@ import { GQATable } from '../utils/GQAWebService';
 export class MainView {
   @Prop() side: String;
   @Prop() appState: GQAAppState;
-  @State() model: GQAModel;
+  @Prop() model: GQAModel;
+
   @State() table: GQATable;
 
-  @Listen('rightRowSelected')
-  rowSelectionHandler(event: CustomEvent) {
-    // console.info(event.detail, this.currentState.leftModel)
-  }
-
-  async componentWillLoad() {
-    if(this.side == 'left') {
-      this.model = this.currentState.leftModel;
-      // if(this.currentState.leftId) await this.model.getItemData(this.currentState.leftId);
-    } else {
-      this.model = this.currentState.rightModel;
-      // if(this.currentState.rightId) await this.model.getItemData(this.currentState.rightId);
-    }
-  }
+  async componentWillLoad() { }
 
   render() {
     return [
@@ -35,14 +23,14 @@ export class MainView {
         <h2>
           { this.model.item && this.model.item.id ? 'Edit' : 'New' } {this.model.table.singularName}
         </h2>
-        <gqa-form-component appState={this.appState} side={this.side}/>
+        <gqa-form-component appState={this.appState} side={this.side} model={this.model}/>
 
         <h2>
           {this.side == 'left'
             ? this.model.table.pluralName + ' List'
             : 'Select ' + this.model.table.singularName}
         </h2>
-        <gqa-list-component appState={this.appState} side={this.side}/>
+        <gqa-list-component appState={this.appState} model={this.model} side={this.side}/>
       </div>
     ];
   }

@@ -14,10 +14,11 @@ import { EventEmitter } from 'events';
 export class ListComponent {
   @Prop() side: String;
   @Prop() appState: GQAAppState;
+  @Prop() model: GQAModel;
 
+  @Event() leftRowSelected: EventEmitter;
   @Event() rightRowSelected: EventEmitter;
 
-  @State() model: GQAModel;
   @State() table: GQATable;
   @State() data: any;
   @State() editing: boolean;
@@ -37,15 +38,6 @@ export class ListComponent {
     colSize = ['id'].includes(field.inputType) ? 1 : colSize;
     colSize = !!colSize ? String(colSize) : '';
     return String(colSize);
-  }
-
-  navToRow(id) {
-    let route =
-      window.location.origin +
-      '/gqa-admin/' +
-      this.model.table.dataName + '/' +
-      id + '/';
-    window.location.href = route;
   }
 
   render() {
@@ -74,9 +66,10 @@ export class ListComponent {
 
       let element =
         <ion-row class={bgColor + ' gqa-table-row'} onClick={() => {
+          let data = ({table: this.table.dataName, id: row.id, side: this.side} as any);
           this.side == 'left'
-          ? this.navToRow(row.id)
-          : this.rightRowSelected.emit(({table: this.table, row: row.id} as any));
+          ? this.leftRowSelected.emit(data)
+          : this.rightRowSelected.emit(data);
         }}>
           {columns}
         </ion-row>

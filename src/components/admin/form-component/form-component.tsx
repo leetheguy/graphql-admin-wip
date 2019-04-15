@@ -1,4 +1,4 @@
-import { Component, Prop, State } from '@stencil/core';
+import { Component, Prop, State, Event } from '@stencil/core';
 import { GQAAppState } from '../utils/GQAAppState';
 import { GQAModel } from '../utils/GQAModel';
 import { GQATable } from '../utils/GQAWebService';
@@ -6,6 +6,7 @@ import { GQATable } from '../utils/GQAWebService';
 import _ from 'lodash';
 import moment from 'moment';
 import Quill from 'quill'
+import { EventEmitter } from 'events';
 
 @Component({
   tag: 'gqa-form-component',
@@ -14,8 +15,10 @@ import Quill from 'quill'
 export class FormComponent {
   @Prop() side: String;
   @Prop() appState: GQAAppState;
+  @Prop() model: GQAModel;
 
-  @State() model: GQAModel;
+  @Event() subTableSelected: EventEmitter;
+
   @State() table: GQATable;
   @State() data: any;
   @State() elements = [];
@@ -23,7 +26,14 @@ export class FormComponent {
   @State() quill: Quill;
 
   async componentWillLoad() {
-    this.model = this.side === 'left' ? this.currentState.leftModel : this.currentState.rightModel;
+    this.buildForm();
+  }
+
+  async componentWillUpdate() {
+    this.buildForm();
+  }
+
+  buildForm() {
     this.table = this.model.table;
     if(this.model.item) {
       this.data = this.model.item
@@ -35,7 +45,6 @@ export class FormComponent {
       //   id: null,
       // });
     }
-    this.editing = !!this.data.id;
 
     this.elements = _(this.table.fields)
     .map(field => {field.order = !!field.order ? field.order : 1; return field})
@@ -60,36 +69,24 @@ export class FormComponent {
         case 'table':
           let fieldId = this.model.item ? this.model.item[field.dataName].id : null;
 
-          let route =
-            window.location.origin +
-            '/gqa-admin/' +
-            this.table.dataName + '/' +
-            (this.model.item && this.model.item.id ? this.model.item.id + '/' : '') +
-            field.tableName + '/' + 
-            (fieldId ? fieldId + '/' : '' );
-
-          element = (this.side == 'left')
-            ?
-              (fieldId
-                ?
-                  [<ion-col size="6">
-                    Current {field.singularName} ID: {fieldId}
-                  </ion-col>,
-                  <ion-col size="6">
-                    <ion-button expand="block" onClick={() => window.location.href = route}>
-                      Select {field.singularName}
-                    </ion-button>
-                  </ion-col>]
-                :
-                  <ion-col size="12">
-                    <ion-button expand="block" onClick={() => window.location.href = route}>
-                      Add {field.singularName}
-                    </ion-button>
-                  </ion-col>
-              )
-            :
-              null
-            ;
+          element = 
+            (fieldId
+              ?
+                [<ion-col size="6">
+                  Current {field.singularName} ID: {fieldId}
+                </ion-col>,
+                <ion-col size="6">
+                  <ion-button expand="block" onClick={() => this.subTableSelected.emit({table: field.tableName, id: fieldId, side: this.side} as any)}>
+                    Select {field.singularName}
+                  </ion-button>
+                </ion-col>]
+              :
+                <ion-col size="12">
+                  <ion-button expand="block" onClick={() =>  this.subTableSelected.emit({table: field.tableName, id: fieldId, side: this.side} as any)}>
+                    Add {field.singularName}
+                  </ion-button>
+                </ion-col>
+            );
           break;
 
         case 'textarea':

@@ -14,7 +14,8 @@
     "noUnusedLocals": false, //TODO DEV change these back for production
     "noUnusedParameters": false, //TODO DEV change these back for production
     "jsx": "react",
-    "jsxFactory": "h"
+    "jsxFactory": "h",
+    "sourceMap": true
   },
   "include": [
     "src"

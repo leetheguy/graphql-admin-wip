@@ -134,9 +134,9 @@ export class GQATable {
   getFieldsAsGQLString() {
     return `{ ${
       _.map(this.fields, field =>
-        field.inputType != 'table'
-        ? field.dataName
-        : field.dataName + '{ id }')
+        field.inputType == 'table'
+        ? field.dataName + '{ id }'
+        : field.dataName)
       .join(' ')
     } }`;
   }

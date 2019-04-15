@@ -33,6 +33,7 @@
     "jest-cli": "23.6.0",
     "puppeteer": "1.11.0",
     "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-globals": "^1.4.0"
+    "rollup-plugin-node-globals": "^1.4.0",
+    "source-map-support": "^0.5.12"
   }
 }

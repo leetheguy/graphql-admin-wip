@@ -17,23 +17,21 @@ export class GQAAppState {
 
   models(state = [], action) {
     switch (action.type) {
+      case 'empty_models':
+        state = [];
+        break;
+      case 'reset_model':
+        state = [action.model];
+        break;
       case 'push_model':
-        state = _.concat(state, action.model)
+        state = _.concat(state, action.model);
         break;
       case 'pop_model':
-        state = _.dropRight(state, action.model)
+        state = _.dropRight(state, action.model);
         break;
     }
     return state;
   }
-
-  // rightModel(state = {}, action) {
-  //   switch (action.type) {
-  //     case 'set_right_model': return action.model;
-  //     case 'clear_right_model': return null;
-  //     default: return state;
-  //   }
-  // }
 
   leftId(state = null, action) {
     switch (action.type) {
@@ -54,32 +52,9 @@ export class GQAAppState {
   rootReducer: Reducer = combineReducers({
     webService: this.webService,
     models: this.models,
-    // browserMode:         this.browserMode,
-    // developerMode:       this.developerMode,
-    // appBooting:       this.appBooting,
-    // platformReady:       this.platformReady,
-    // currentPage:      this.currentPage,
-    // navParams:           this.navParams,
-    // navViews:         this.navViews,
-    // canGoBack:        this.canGoBack,
-    // authenticated:       this.authenticated,
-    // authUser:            this.authUser,
-    // currentUser:         this.currentUser,
-    // currentUserVehicles: this.currentUserVehicles,
-    // currentUserEmail:   this.currentUserEmail,
-    // currentUserToken:   this.currentUserToken,
-    // messages:            this.messages,
-    // rawUser:            this.rawUser,
-    // loading:             this.loading,
-    // fcmToken:           this.fcmToken,
-    // authToken:           this.authToken,
-    // showModal:           this.showModal,
-    // showAbout:           this.showAbout,
-    // aboutDetailShowing: this.aboutDetailShowing,
-    // registered:          this.registered,
-    // comingSoon:          this.comingSoon,
   });
 }
+
 /**
  * This is a reducer, a pure function with (state, action) => state signature.
  * It describes how an action transforms the state into the next state.

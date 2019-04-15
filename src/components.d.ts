@@ -12,6 +12,9 @@ import 'ionicons';
 import {
   GQAAppState,
 } from './components/admin/utils/GQAAppState';
+import {
+  GQAModel,
+} from './components/admin/utils/GQAModel';
 
 
 export namespace Components {
@@ -24,10 +27,13 @@ export namespace Components {
 
   interface GqaFormComponent {
     'appState': GQAAppState;
+    'model': GQAModel;
     'side': String;
   }
   interface GqaFormComponentAttributes extends StencilHTMLAttributes {
     'appState'?: GQAAppState;
+    'model'?: GQAModel;
+    'onSubTableSelected'?: (event: CustomEvent) => void;
     'side'?: String;
   }
 
@@ -43,10 +49,13 @@ export namespace Components {
 
   interface GqaListComponent {
     'appState': GQAAppState;
+    'model': GQAModel;
     'side': String;
   }
   interface GqaListComponentAttributes extends StencilHTMLAttributes {
     'appState'?: GQAAppState;
+    'model'?: GQAModel;
+    'onLeftRowSelected'?: (event: CustomEvent) => void;
     'onRightRowSelected'?: (event: CustomEvent) => void;
     'side'?: String;
   }
@@ -59,10 +68,12 @@ export namespace Components {
 
   interface GqaMainView {
     'appState': GQAAppState;
+    'model': GQAModel;
     'side': String;
   }
   interface GqaMainViewAttributes extends StencilHTMLAttributes {
     'appState'?: GQAAppState;
+    'model'?: GQAModel;
     'side'?: String;
   }
 
