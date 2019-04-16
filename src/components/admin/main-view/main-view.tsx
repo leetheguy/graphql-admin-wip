@@ -20,16 +20,8 @@ export class MainView {
   render() {
     return [
       <div>
-        <h2>
-          { this.model.item && this.model.item.id ? 'Edit' : 'New' } {this.model.table.singularName}
-        </h2>
         <gqa-form-component appState={this.appState} side={this.side} model={this.model}/>
 
-        <h2>
-          {this.side == 'left'
-            ? this.model.table.pluralName + ' List'
-            : 'Select ' + this.model.table.singularName}
-        </h2>
         <gqa-list-component appState={this.appState} model={this.model} side={this.side}/>
       </div>
     ];

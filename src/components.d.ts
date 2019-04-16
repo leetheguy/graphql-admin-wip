@@ -81,7 +81,9 @@ export namespace Components {
   interface AppRootAttributes extends StencilHTMLAttributes {}
 
   interface GqaAdminMenu {}
-  interface GqaAdminMenuAttributes extends StencilHTMLAttributes {}
+  interface GqaAdminMenuAttributes extends StencilHTMLAttributes {
+    'onNavTo'?: (event: CustomEvent) => void;
+  }
 }
 
 declare global {

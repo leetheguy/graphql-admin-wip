@@ -18,6 +18,13 @@ export class AdminPage {
   @State() leftModel: Array<GQAModel>;
   @State() rightModel: Array<GQAModel>;
 
+  @Listen('navTo')
+  async navToHandler(event: CustomEvent) {
+    await this.navigation.resetPages(event.detail.table);
+    this.navigation.rebuildUrl();
+    this.updateModels();
+  }
+
   @Listen('leftRowSelected')
   async leftRowSelectionHandler(event: CustomEvent) {
     await this.navigation.resetPages(event.detail.table, event.detail.id);
@@ -84,8 +91,13 @@ export class AdminPage {
     let content = 
       <ion-grid>
         <ion-row>
-          {this.leftColumn}
-          {this.rightColumn}
+          <gqa-form-component appState={this.appState} model={this.models[0]} side="left"/>
+          <gqa-list-component appState={this.appState} model={this.models[0]} side="left"/>
+
+          {!!this.models[1] ? [
+            <gqa-form-component appState={this.appState} model={this.models[1]} side="right"/>,
+            <gqa-list-component appState={this.appState} model={this.models[1]} side="right"/>,
+          ]: null}
           {/* <gqa-list-component model={new GQAModel(this.service, table)} table={table} /> */}
           {/* <gqa-main-view foo={this.foo} onFooClicked={(event) => this.foo = event.detail}/> */}
         </ion-row>
@@ -96,7 +108,7 @@ export class AdminPage {
       <ion-content>
         <ion-grid no-padding class="h-100">
           <ion-row class="h-100">
-            <ion-col size="2" class="bg-dark-gray near-white h-100">
+            <ion-col size="2" no-padding class="bg-dark-gray near-white h-100">
               <gqa-admin-menu/>
             </ion-col>
             <ion-col size="10">

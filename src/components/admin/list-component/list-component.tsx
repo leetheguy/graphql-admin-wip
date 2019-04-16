@@ -77,6 +77,11 @@ export class ListComponent {
     })
 
     return [
+      <h2>
+        {this.side == 'left'
+          ? this.model.table.pluralName + ' List'
+          : 'Select ' + this.model.table.singularName}
+      </h2>,
       <ion-grid class="ba br2 b--silver">
         <ion-row class="bg-moon-gray">
           {_.map(this.table.fields, field  =>

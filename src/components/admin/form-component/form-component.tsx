@@ -1,4 +1,4 @@
-import { Component, Prop, State, Event } from '@stencil/core';
+import { Component, Prop, State, Event, Watch } from '@stencil/core';
 import { GQAAppState } from '../utils/GQAAppState';
 import { GQAModel } from '../utils/GQAModel';
 import { GQATable } from '../utils/GQAWebService';
@@ -16,6 +16,10 @@ export class FormComponent {
   @Prop() side: String;
   @Prop() appState: GQAAppState;
   @Prop() model: GQAModel;
+  @Watch('model') 
+  watchModelHandler() {
+    this.buildForm();
+  }
 
   @Event() subTableSelected: EventEmitter;
 
@@ -26,10 +30,6 @@ export class FormComponent {
   @State() quill: Quill;
 
   async componentWillLoad() {
-    this.buildForm();
-  }
-
-  async componentWillUpdate() {
     this.buildForm();
   }
 
@@ -211,6 +211,9 @@ export class FormComponent {
 
     return [
       <div>
+        <h2>
+          { this.model.item && this.model.item.id ? 'Edit' : 'New' } {this.model.table.singularName}
+        </h2>
         <form onSubmit={(event) => this.formSubmitted(event)}>
           <ion-grid class="ba br2 b--silver">
             <ion-row>
