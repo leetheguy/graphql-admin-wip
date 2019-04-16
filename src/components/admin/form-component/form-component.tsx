@@ -22,6 +22,8 @@ export class FormComponent {
   }
 
   @Event() subTableSelected: EventEmitter;
+  @Event() formSubmittedEvent: EventEmitter;
+  @Event() modelUpdated: EventEmitter;
 
   @State() table: GQATable;
   @State() data: any;
@@ -63,11 +65,24 @@ export class FormComponent {
           break;
 
         case 'number':
-          fieldInput = <ion-input type="number" inputmode="numeric" autofocus={field.order == 0} name={field.dataName} value={this.data[field.dataName]}/>
+          fieldInput =
+            <ion-input
+              type="number"
+              inputmode="numeric"
+              autofocus={field.order == 0}
+              name={field.dataName}
+              value={this.data[field.dataName]}
+              debounce={500}
+              onIonChange={(event: any) => {
+                this.data[field.dataName] = event.srcElement.value;
+                this.modelUpdated.emit({side: this.side, model: this.model} as any);
+              }}
+              step="0.01"
+            />
           break;
 
         case 'table':
-          let fieldId = this.model.item ? this.model.item[field.dataName].id : null;
+          let fieldId = this.model.item ? this.model.item[field.dataName] : null;
 
           element = 
             (fieldId
@@ -91,12 +106,30 @@ export class FormComponent {
 
         case 'textarea':
           colSize = '12';
-          fieldInput = <ion-textarea autofocus={field.order == 0} name={field.dataName} id="editor"></ion-textarea>;
+          fieldInput =
+            <ion-textarea
+              autofocus={field.order == 0}
+              name={field.dataName}
+              value={this.data[field.dataName]}
+              debounce={500}
+              onIonChange={(event: any) => {
+                this.data[field.dataName] = event.srcElement.value;
+                this.modelUpdated.emit({side: this.side, model: this.model} as any);
+              }}
+              id="editor"
+            ></ion-textarea>;
           break;
 
         case 'select':
           fieldInput =
-            <ion-select name={field.dataName} value="pounds">
+            <ion-select
+              name={field.dataName}
+              value={this.data[field.dataName]}
+              onIonChange={(event: any) => {
+                this.data[field.dataName] = event.srcElement.value;
+                this.modelUpdated.emit({side: this.side, model: this.model} as any);
+              }}
+            >
               {_.map(field.selectOptions, option => <ion-select-option value={option}>{option}</ion-select-option>)}
             </ion-select>
           break;
@@ -112,18 +145,50 @@ export class FormComponent {
                 <ion-col size="6" no-padding>
                   <ion-item>
                     <ion-label position="floating">{field.singularName + ' - Date'}</ion-label>
-                    <ion-input type="date" inputmode="date" autofocus={field.order == 0} name={field.dataName} value={date} class="date-input"/>
+                    <ion-input
+                      type="date"
+                      inputmode="date"
+                      autofocus={field.order == 0}
+                      name={field.dataName}
+                      value={date}
+                      debounce={500}
+                      onIonChange={(event: any) => {
+                        let oldDate = moment.utc(this.data[field.dataName])
+                        let newDate = moment.utc(event.srcElement.value)
+                        this.data[field.dataName] = oldDate
+                          .set({year: newDate.year(), month: newDate.month(), date: newDate.date()})
+                          .format();
+                        this.modelUpdated.emit({side: this.side, model: this.model} as any);
+                      }}
+                      class="date-input"
+                    />
                   </ion-item>
                 </ion-col>
                 <ion-col size="6" no-padding>
                   <ion-item>
                     <ion-label position="floating">{field.singularName + ' - Time'}</ion-label>
-                    <ion-input type="time" inputmode="time" autofocus={field.order == 0} name={field.dataName} value={time} class="date-input"/>
+                    <ion-input
+                      type="time"
+                      inputmode="time"
+                      autofocus={field.order == 0}
+                      name={field.dataName}
+                      value={time}
+                      debounce={500}
+                      onIonChange={(event: any) => {
+                        let oldDate = moment.utc(this.data[field.dataName])
+                        let newDate = moment.utc(event.srcElement.value, 'hh:mm:ss')
+                        this.data[field.dataName] = oldDate
+                          .set({hour: newDate.hour(), minute: newDate.minute(), second: newDate.second()})
+                          .format();
+                        this.modelUpdated.emit({side: this.side, model: this.model} as any);
+                      }}
+                      class="date-input"
+                      step="1"
+                    />
                   </ion-item>
                 </ion-col>
               </ion-row>
             </ion-col>
-          // element = <input id="foo" autofocus={field.order == 0} name={field.dataName}/>
         break;
 
         default:
@@ -133,7 +198,10 @@ export class FormComponent {
               autofocus={field.order == 0}
               name={field.dataName}
               value={this.data[field.dataName]}
-              onIonChange={event => this.data[field.dataName] = event.detail.value}
+              onIonChange={(event: any) => {
+                this.data[field.dataName] = event.detail.value;
+                this.modelUpdated.emit({side: this.side, model: this.model} as any);
+              }}
               debounce={500}/>
       }
 
@@ -177,12 +245,15 @@ export class FormComponent {
     // this.quill = new Quill('#editor', options);
   }
 
-  formSubmitted(event) {
+  async formSubmitted(event) {
+    console.info(this.data)
     event.preventDefault();
     if(this.data.id) {
-      this.model.updateItem(this.data);
+      await this.model.updateItem(this.data);
+      this.formSubmittedEvent.emit('');
     } else {
-      this.model.createItem(this.data);
+      await this.model.createItem(this.data);
+      this.formSubmittedEvent.emit('');
     }
   }
 
@@ -191,7 +262,7 @@ export class FormComponent {
   }
 
   render() {
-    let buttonRow = this.editing
+    let buttonRow = this.model.item && this.model.item.id
       ?
       <ion-row>
         <ion-col size="auto">

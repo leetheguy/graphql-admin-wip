@@ -53,6 +53,14 @@ export class AdminPage {
     // console.info(event.detail, this.currentState.leftModel)
   }
 
+  @Listen('formSubmittedEvent')
+  async formSubmittedHandler(event: CustomEvent) {
+    // _.each(this.currentState.models, model => model.getListData());
+    await this.navigation.buildDataFromUrl();
+
+    this.updateModels();
+  }
+
   appState: GQAAppState;
   webService: GQAWebService;
   navigation: GQADataNav;
@@ -91,15 +99,24 @@ export class AdminPage {
     let content = 
       <ion-grid>
         <ion-row>
-          <gqa-form-component appState={this.appState} model={this.models[0]} side="left"/>
-          <gqa-list-component appState={this.appState} model={this.models[0]} side="left"/>
-
-          {!!this.models[1] ? [
-            <gqa-form-component appState={this.appState} model={this.models[1]} side="right"/>,
-            <gqa-list-component appState={this.appState} model={this.models[1]} side="right"/>,
-          ]: null}
-          {/* <gqa-list-component model={new GQAModel(this.service, table)} table={table} /> */}
-          {/* <gqa-main-view foo={this.foo} onFooClicked={(event) => this.foo = event.detail}/> */}
+          <ion-col>
+            <gqa-form-component appState={this.appState} model={this.models[0]} side="left"/>
+          </ion-col>
+          {!!this.models[1] ? 
+            <ion-col>
+              <gqa-form-component appState={this.appState} model={this.models[1]} side="right"/>
+            </ion-col>
+          : ''}
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <gqa-list-component appState={this.appState} model={this.models[0]} side="left"/>
+          </ion-col>
+          {!!this.models[1] ? 
+            <ion-col>
+              <gqa-list-component appState={this.appState} model={this.models[1]} side="right"/>
+            </ion-col>
+          : ''}
         </ion-row>
       </ion-grid>
     

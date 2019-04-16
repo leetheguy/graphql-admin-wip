@@ -33,6 +33,8 @@ export namespace Components {
   interface GqaFormComponentAttributes extends StencilHTMLAttributes {
     'appState'?: GQAAppState;
     'model'?: GQAModel;
+    'onFormSubmittedEvent'?: (event: CustomEvent) => void;
+    'onModelUpdated'?: (event: CustomEvent) => void;
     'onSubTableSelected'?: (event: CustomEvent) => void;
     'side'?: String;
   }

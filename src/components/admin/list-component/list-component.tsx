@@ -1,4 +1,4 @@
-import { Component, State, Prop, Event } from '@stencil/core';
+import { Component, State, Prop, Event, Watch } from '@stencil/core';
 import { GQAModel } from '../utils/GQAModel';
 import { GQATable } from '../utils/GQAWebService';
 import { GQAAppState } from '../utils/GQAAppState';
@@ -15,6 +15,10 @@ export class ListComponent {
   @Prop() side: String;
   @Prop() appState: GQAAppState;
   @Prop() model: GQAModel;
+  @Watch('model') 
+  watchModelHandler() { 
+    this.buildList();
+  }
 
   @Event() leftRowSelected: EventEmitter;
   @Event() rightRowSelected: EventEmitter;
@@ -24,12 +28,12 @@ export class ListComponent {
   @State() editing: boolean;
   @State() list: Array<object> = [];
   @State() item: object = null;
+  @State() header: any;
+  @State() rows: any;
     
 
   async componentWillLoad() {
-    this.model = this.side == 'left' ? this.currentState.leftModel : this.currentState.rightModel;
-    this.table = this.model.table;
-    this.data = this.model.list;
+    this.buildList()
   }
 
   getColSize(field): string {
@@ -40,8 +44,28 @@ export class ListComponent {
     return String(colSize);
   }
 
-  render() {
-    let bodyRows = _.map(this.data, (row, index: number) => {
+  buildList() {
+    this.table = this.model.table;
+    this.data = this.model.list;
+    console.info(this.data, this.table)
+    this.buildHeader();
+    this.buildRows();
+  }
+
+  buildHeader() {
+    this.header =  <ion-row class="bg-moon-gray">
+      {_.map(this.table.fields, field  =>
+        this.getColSize(field) != '-1' ?
+          <ion-col size={this.getColSize(field)}>
+            {field.singularName}
+          </ion-col>
+        : null
+      )}
+    </ion-row>
+  }
+
+  buildRows() {
+    this.rows = _.map(this.data, (row, index: number) => {
       let columns = _.map(this.table.fields, field => {
         let output = row[field.dataName];
         switch(field.inputType) {
@@ -75,7 +99,9 @@ export class ListComponent {
         </ion-row>
       return element;
     })
+  }
 
+  render() {
     return [
       <h2>
         {this.side == 'left'
@@ -83,16 +109,8 @@ export class ListComponent {
           : 'Select ' + this.model.table.singularName}
       </h2>,
       <ion-grid class="ba br2 b--silver">
-        <ion-row class="bg-moon-gray">
-          {_.map(this.table.fields, field  =>
-            this.getColSize(field) != '-1' ?
-              <ion-col size={this.getColSize(field)}>
-                {field.singularName}
-              </ion-col>
-            : null
-          )}
-        </ion-row>
-        {bodyRows}
+        {this.header}
+        {this.rows}
       </ion-grid>
     ];
   }

@@ -29,19 +29,21 @@ export class GQADataNav {
       }
     }
 
+    this.appState.store.dispatch({type: 'empty_models'});
     _.each(models, model => this.appState.store.dispatch({type: 'push_model', model: model}));
   }
 
   async resetPages(tableName: string, id = 0) {
     let model = new GQAModel(this.appState, this.webService.getTableByName(tableName));
+    await model.getListData();
     if(id) await model.getItemData(id);
     this.appState.store.dispatch({type: 'reset_model', model: model});
     return model;
   }
 
   async pushPage(tableName: string, id = 0) {
-    console.info(tableName)
     let model = new GQAModel(this.appState, this.webService.getTableByName(tableName));
+    await model.getListData();
     if(id) await model.getItemData(id);
     this.appState.store.dispatch({type: 'push_model', model: model})
     return model;
