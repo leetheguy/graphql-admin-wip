@@ -71,7 +71,6 @@ export class GQAWebService {
       }
     `;
 
-    console.info(data, JSON.stringify(data), query)
     return await axios.post(this.url, {query: query, variables: {id: data.id, changes: data}})
   }
 

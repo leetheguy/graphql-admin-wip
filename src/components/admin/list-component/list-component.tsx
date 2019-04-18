@@ -47,7 +47,6 @@ export class ListComponent {
   buildList() {
     this.table = this.model.table;
     this.data = this.model.list;
-    console.info(this.data, this.table)
     this.buildHeader();
     this.buildRows();
   }

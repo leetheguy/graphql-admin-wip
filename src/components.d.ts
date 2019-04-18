@@ -82,6 +82,9 @@ export namespace Components {
   interface AppRoot {}
   interface AppRootAttributes extends StencilHTMLAttributes {}
 
+  interface GqaDashboardPage {}
+  interface GqaDashboardPageAttributes extends StencilHTMLAttributes {}
+
   interface GqaAdminMenu {}
   interface GqaAdminMenuAttributes extends StencilHTMLAttributes {
     'onNavTo'?: (event: CustomEvent) => void;
@@ -100,6 +103,7 @@ declare global {
     'GqaListItemComponent': Components.GqaListItemComponent;
     'GqaMainView': Components.GqaMainView;
     'AppRoot': Components.AppRoot;
+    'GqaDashboardPage': Components.GqaDashboardPage;
     'GqaAdminMenu': Components.GqaAdminMenu;
   }
 
@@ -114,6 +118,7 @@ declare global {
     'gqa-list-item-component': Components.GqaListItemComponentAttributes;
     'gqa-main-view': Components.GqaMainViewAttributes;
     'app-root': Components.AppRootAttributes;
+    'gqa-dashboard-page': Components.GqaDashboardPageAttributes;
     'gqa-admin-menu': Components.GqaAdminMenuAttributes;
   }
 
@@ -178,6 +183,12 @@ declare global {
     new (): HTMLAppRootElement;
   };
 
+  interface HTMLGqaDashboardPageElement extends Components.GqaDashboardPage, HTMLStencilElement {}
+  var HTMLGqaDashboardPageElement: {
+    prototype: HTMLGqaDashboardPageElement;
+    new (): HTMLGqaDashboardPageElement;
+  };
+
   interface HTMLGqaAdminMenuElement extends Components.GqaAdminMenu, HTMLStencilElement {}
   var HTMLGqaAdminMenuElement: {
     prototype: HTMLGqaAdminMenuElement;
@@ -195,6 +206,7 @@ declare global {
     'gqa-list-item-component': HTMLGqaListItemComponentElement
     'gqa-main-view': HTMLGqaMainViewElement
     'app-root': HTMLAppRootElement
+    'gqa-dashboard-page': HTMLGqaDashboardPageElement
     'gqa-admin-menu': HTMLGqaAdminMenuElement
   }
 
@@ -209,6 +221,7 @@ declare global {
     'gqa-list-item-component': HTMLGqaListItemComponentElement;
     'gqa-main-view': HTMLGqaMainViewElement;
     'app-root': HTMLAppRootElement;
+    'gqa-dashboard-page': HTMLGqaDashboardPageElement;
     'gqa-admin-menu': HTMLGqaAdminMenuElement;
   }
 

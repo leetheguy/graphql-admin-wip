@@ -29,6 +29,9 @@ export class GQAAppState {
       case 'pop_model':
         state = _.dropRight(state, action.model);
         break;
+      case 'update_model':
+        state[action.index] = action.model;
+        break;
     }
     return state;
   }

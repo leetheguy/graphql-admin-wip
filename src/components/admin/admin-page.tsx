@@ -49,8 +49,20 @@ export class AdminPage {
 
   @Listen('rightRowSelected')
   rightRowSelectionHandler(event: CustomEvent) {
-    console.info('right ', event)
-    // console.info(event.detail, this.currentState.leftModel)
+  }
+
+  @Listen('modelUpdated')
+  async modelUpdatedHandler(event: CustomEvent) {
+    let side = event.detail.side;
+    let model = event.detail.model;
+    let index = this.models.length - (side == 'left' && this.models.length == 2 ? 2 :  1);
+
+    this.appState.store.dispatch({type: 'update_model', index: index, model: model})
+
+    // _.each(this.currentState.models, model => model.getListData());
+    // await this.navigation.buildDataFromUrl();
+
+    this.updateModels();
   }
 
   @Listen('formSubmittedEvent')
@@ -87,7 +99,10 @@ export class AdminPage {
   }
 
   updateModels() {
-    this.models = _.takeRight(this.currentState.models, 2);
+    console.info('updating models')
+    this.models = (_(this.currentState.models)
+      .takeRight(2)
+      .value() as any);
   }
 
   render() {

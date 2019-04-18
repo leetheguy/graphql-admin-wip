@@ -73,8 +73,9 @@ export class FormComponent {
               name={field.dataName}
               value={this.data[field.dataName]}
               debounce={500}
-              onIonChange={(event: any) => {
-                this.data[field.dataName] = event.srcElement.value;
+              onIonInput={(event: any) => {
+                console.info(event)
+                this.data[field.dataName] = Number(event.srcElement.value);
                 this.modelUpdated.emit({side: this.side, model: this.model} as any);
               }}
               step="0.01"
@@ -87,6 +88,12 @@ export class FormComponent {
           element = 
             (fieldId
               ?
+                <ion-col size="12">
+                  <ion-button expand="block" onClick={() =>  this.subTableSelected.emit({table: field.tableName, id: fieldId, side: this.side} as any)}>
+                    Add {field.singularName}
+                  </ion-button>
+                </ion-col>
+              :
                 [<ion-col size="6">
                   Current {field.singularName} ID: {fieldId}
                 </ion-col>,
@@ -95,12 +102,6 @@ export class FormComponent {
                     Select {field.singularName}
                   </ion-button>
                 </ion-col>]
-              :
-                <ion-col size="12">
-                  <ion-button expand="block" onClick={() =>  this.subTableSelected.emit({table: field.tableName, id: fieldId, side: this.side} as any)}>
-                    Add {field.singularName}
-                  </ion-button>
-                </ion-col>
             );
           break;
 
@@ -112,7 +113,7 @@ export class FormComponent {
               name={field.dataName}
               value={this.data[field.dataName]}
               debounce={500}
-              onIonChange={(event: any) => {
+              onIonInput={(event: any) => {
                 this.data[field.dataName] = event.srcElement.value;
                 this.modelUpdated.emit({side: this.side, model: this.model} as any);
               }}
@@ -152,7 +153,7 @@ export class FormComponent {
                       name={field.dataName}
                       value={date}
                       debounce={500}
-                      onIonChange={(event: any) => {
+                      onIonInput={(event: any) => {
                         let oldDate = moment.utc(this.data[field.dataName])
                         let newDate = moment.utc(event.srcElement.value)
                         this.data[field.dataName] = oldDate
@@ -174,7 +175,7 @@ export class FormComponent {
                       name={field.dataName}
                       value={time}
                       debounce={500}
-                      onIonChange={(event: any) => {
+                      onIonInput={(event: any) => {
                         let oldDate = moment.utc(this.data[field.dataName])
                         let newDate = moment.utc(event.srcElement.value, 'hh:mm:ss')
                         this.data[field.dataName] = oldDate
@@ -198,7 +199,7 @@ export class FormComponent {
               autofocus={field.order == 0}
               name={field.dataName}
               value={this.data[field.dataName]}
-              onIonChange={(event: any) => {
+              onIonInput={(event: any) => {
                 this.data[field.dataName] = event.detail.value;
                 this.modelUpdated.emit({side: this.side, model: this.model} as any);
               }}
@@ -246,7 +247,6 @@ export class FormComponent {
   }
 
   async formSubmitted(event) {
-    console.info(this.data)
     event.preventDefault();
     if(this.data.id) {
       await this.model.updateItem(this.data);
