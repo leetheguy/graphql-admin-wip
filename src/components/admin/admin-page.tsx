@@ -15,8 +15,9 @@ export class AdminPage {
   @Element() el!: HTMLStencilElement;
 
   @State() models: Array<GQAModel>;
-  @State() leftModel: Array<GQAModel>;
-  @State() rightModel: Array<GQAModel>;
+  @State() leftModel: GQAModel;
+  @State() rightModel: GQAModel;
+  @State() content: any;
 
   @Listen('navTo')
   async navToHandler(event: CustomEvent) {
@@ -48,7 +49,17 @@ export class AdminPage {
   }
 
   @Listen('rightRowSelected')
-  rightRowSelectionHandler(event: CustomEvent) {
+  async rightRowSelectionHandler(event: CustomEvent) {
+    let model = this.models[0];
+    _.each(model.table.fields, field => {
+      if(field.inputType == 'table' && field.tableName == event.detail.table) {
+        model.item[field.dataName] = event.detail.id;
+      }
+    });
+    let index = this.models.length - 2;
+
+    await this.appState.store.dispatch({type: 'update_model', index: index, model: model})
+    this.updateModels();
   }
 
   @Listen('modelUpdated')
@@ -77,9 +88,6 @@ export class AdminPage {
   webService: GQAWebService;
   navigation: GQADataNav;
 
-  leftColumn = null;
-  rightColumn = null;
-
   async componentWillLoad() {
     this.appState = new GQAAppState();
     this.navigation = new GQADataNav(this.appState);
@@ -90,8 +98,7 @@ export class AdminPage {
     this.navigation.rebuildUrl();
 
     window.onpopstate = async () => { 
-      await this.appState.store.dispatch({type: 'empty_models'});
-      await this.navigation.buildDataFromUrl();
+      await this.appState.store.dispatch({type: 'pop_model'});
       this.updateModels();
     }
 
@@ -99,42 +106,47 @@ export class AdminPage {
   }
 
   updateModels() {
-    console.info('updating models')
-    this.models = (_(this.currentState.models)
-      .takeRight(2)
-      .value() as any);
+    this.models = _.takeRight(this.currentState.models, 2)
+    this.leftModel = new GQAModel(this.appState, this.models[0].table);
+    this.leftModel.item = this.models[0].item;
+    this.leftModel.list = this.models[0].list;
+    if(this.models[1]) {
+      this.rightModel = new GQAModel(this.appState, this.models[1].table);
+      this.rightModel.item = this.models[1].item;
+      this.rightModel.list = this.models[1].list;
+    }
+    this.buildContent();
   }
 
-  render() {
-    this.leftColumn = <ion-col><gqa-main-view side="left" appState={this.appState} model={this.models[0]}/></ion-col>;
-    this.rightColumn = !!this.models[1]
-      ? <ion-col><gqa-main-view side="right" appState={this.appState} model={this.models[1]}/></ion-col>
-      : null;
-
-    let content = 
+  buildContent() {
+    console.info('building content')
+    this.content = null;
+    this.content =
       <ion-grid>
         <ion-row>
           <ion-col>
-            <gqa-form-component appState={this.appState} model={this.models[0]} side="left"/>
+            <gqa-form-component appState={this.appState} model={this.leftModel} side="left"/>
           </ion-col>
-          {!!this.models[1] ? 
+          {!!this.rightModel ? 
             <ion-col>
-              <gqa-form-component appState={this.appState} model={this.models[1]} side="right"/>
+              <gqa-form-component appState={this.appState} model={this.rightModel} side="right"/>
             </ion-col>
           : ''}
         </ion-row>
         <ion-row>
           <ion-col>
-            <gqa-list-component appState={this.appState} model={this.models[0]} side="left"/>
+            <gqa-list-component appState={this.appState} model={this.leftModel} side="left"/>
           </ion-col>
-          {!!this.models[1] ? 
+          {!!this.rightModel ? 
             <ion-col>
-              <gqa-list-component appState={this.appState} model={this.models[1]} side="right"/>
+              <gqa-list-component appState={this.appState} model={this.rightModel} side="right"/>
             </ion-col>
           : ''}
         </ion-row>
       </ion-grid>
-    
+  }
+
+  render() {
     return [
       <gqa-header/>,
       <ion-content>
@@ -144,7 +156,7 @@ export class AdminPage {
               <gqa-admin-menu/>
             </ion-col>
             <ion-col size="10">
-              {content}
+              {this.content}
             </ion-col>
           </ion-row>
         </ion-grid>

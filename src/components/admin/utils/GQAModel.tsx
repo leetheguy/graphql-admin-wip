@@ -27,11 +27,7 @@ export class GQAModel {
 
   getEmptyData() {
     let empty = {};
-    _.each(this.table.fields, field => {
-      empty[field.dataName] = field.inputType == 'table'
-      ? '{ id: null }'
-      : null;
-    });
+    _.each(this.table.fields, field => empty[field.dataName] = null);
     _.unset(empty, 'id');
     return empty
   }

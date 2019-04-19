@@ -18,6 +18,7 @@ export class FormComponent {
   @Prop() model: GQAModel;
   @Watch('model') 
   watchModelHandler() {
+    console.info('model changed')
     this.buildForm();
   }
 
@@ -74,7 +75,6 @@ export class FormComponent {
               value={this.data[field.dataName]}
               debounce={500}
               onIonInput={(event: any) => {
-                console.info(event)
                 this.data[field.dataName] = Number(event.srcElement.value);
                 this.modelUpdated.emit({side: this.side, model: this.model} as any);
               }}
@@ -88,12 +88,6 @@ export class FormComponent {
           element = 
             (fieldId
               ?
-                <ion-col size="12">
-                  <ion-button expand="block" onClick={() =>  this.subTableSelected.emit({table: field.tableName, id: fieldId, side: this.side} as any)}>
-                    Add {field.singularName}
-                  </ion-button>
-                </ion-col>
-              :
                 [<ion-col size="6">
                   Current {field.singularName} ID: {fieldId}
                 </ion-col>,
@@ -102,6 +96,12 @@ export class FormComponent {
                     Select {field.singularName}
                   </ion-button>
                 </ion-col>]
+              :
+                <ion-col size="12">
+                  <ion-button expand="block" onClick={() =>  this.subTableSelected.emit({table: field.tableName, id: fieldId, side: this.side} as any)}>
+                    Add {field.singularName}
+                  </ion-button>
+                </ion-col>
             );
           break;
 
