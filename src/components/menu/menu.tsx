@@ -10,46 +10,46 @@ export class AdminMenu {
   render() {
     return[
       <ul class="ul pl0">
-        <li class="menu-item bb mb2 hover-light-green pointer" onClick={() => this.navTo.emit(({table: 'biomass_inventory'} as any))}>
+        <li class="menu-item bb mb2 hover-light-green pointer" onClick={() => window.location.href = window.location.origin + '/gqa-admin/biomass_inventory/'}>
           <b>Biomass Inv.</b>
         </li>
         <li class="mb4">
           <ul class="ul pl0">
-            <li class="menu-item mb2 pl2 hover-light-green pointer" onClick={() => this.navTo.emit(({table: 'runs'} as any))}>Runs</li>
-            <li class="menu-item mb2 pl2 hover-light-green pointer" onClick={() => this.navTo.emit(({table: 'run_columns'} as any))}>Run Columns</li>
-            <li class="menu-item mb2 pl2 hover-light-green pointer" onClick={() => this.navTo.emit(({table: 'extractions'} as any))}>Extractions</li>
+            <li class="menu-item mb2 pl2 hover-light-green pointer" onClick={() => window.location.href = window.location.origin + '/gqa-admin/runs/'}>Runs</li>
+            <li class="menu-item mb2 pl2 hover-light-green pointer" onClick={() => window.location.href = window.location.origin + '/gqa-admin/run_columns/'}>Run Columns</li>
+            <li class="menu-item mb2 pl2 hover-light-green pointer" onClick={() => window.location.href = window.location.origin + '/gqa-admin/extractions/'}>Extractions</li>
           </ul>
         </li>
-        <li class="menu-item bb mb2 hover-light-green pointer" onClick={() => this.navTo.emit(({table: 'concentrate_inventory'} as any))}>
+        <li class="menu-item bb mb2 hover-light-green pointer" onClick={() => window.location.href = window.location.origin + '/gqa-admin/concentrate_inventory/'}>
           <b>Concentrate Inv.</b>
         </li>
         <li class="mb4">
           <ul class="ul pl0">
-              <li class="menu-item mb2 mt2 pl2 hover-light-green pointer" onClick={() => this.navTo.emit(({table: 'concentrate_sales'} as any))}>Concentrate Sales</li>
+              <li class="menu-item mb2 mt2 pl2 hover-light-green pointer" onClick={() => window.location.href = window.location.origin + '/gqa-admin/concentrate_sales/'}>Concentrate Sales</li>
           </ul>
         </li>
-        <li class="menu-item bb mb4 hover-light-green pointer" onClick={() => this.navTo.emit(({table: 'contacts'} as any))}>
+        <li class="menu-item bb mb4 hover-light-green pointer" onClick={() => window.location.href = window.location.origin + '/gqa-admin/contacts/'}>
           <b>Contacts</b>
         </li>
-        <li class="menu-item bb mb2 hover-light-green pointer" onClick={() => this.navTo.emit(({table: 'employees'} as any))}>
+        <li class="menu-item bb mb2 hover-light-green pointer" onClick={() => window.location.href = window.location.origin + '/gqa-admin/employees/'}>
           <b>Employees</b>
         </li>
         <li class="mb4">
           <ul class="ul pl0">
-            <li class="menu-item mb2 mt2 pl2 hover-light-green pointer" onClick={() => this.navTo.emit(({table: 'employee_hours'} as any))}>Employee Hours</li>
-            <li class="menu-item mb2 mt2 pl2 hover-light-green pointer" onClick={() => this.navTo.emit(({table: 'employee_payroll'} as any))}>Employee Payroll</li>
-            <li class="menu-item mb2 mt2 pl2 hover-light-green pointer" onClick={() => this.navTo.emit(({table: 'employee_notes'} as any))}>Employee Notes</li>
+            <li class="menu-item mb2 mt2 pl2 hover-light-green pointer" onClick={() => window.location.href = window.location.origin + '/gqa-admin/employee_hours/'}>Employee Hours</li>
+            <li class="menu-item mb2 mt2 pl2 hover-light-green pointer" onClick={() => window.location.href = window.location.origin + '/gqa-admin/employee_payroll/'}>Employee Payroll</li>
+            <li class="menu-item mb2 mt2 pl2 hover-light-green pointer" onClick={() => window.location.href = window.location.origin + '/gqa-admin/employee_notes/'}>Employee Notes</li>
           </ul>
         </li>
-        <li class="menu-item bb mb4 hover-light-green pointer" onClick={() => this.navTo.emit(({table: 'expendable_inventory'} as any))}>
+        <li class="menu-item bb mb4 hover-light-green pointer" onClick={() => window.location.href = window.location.origin + '/gqa-admin/expendable_inventory/'}>
           <b>Expendable Inv.</b>
         </li>
-        <li class="menu-item bb mb2 hover-light-green pointer" onClick={() => this.navTo.emit(({table: 'suppliers'} as any))}>
+        <li class="menu-item bb mb2 hover-light-green pointer" onClick={() => window.location.href = window.location.origin + '/gqa-admin/suppliers/'}>
           <b>Suppliers</b>
         </li>
         <li class="mb4">
           <ul class="ul pl0">
-            <li class="menu-item mb2 mt2 pl2 hover-light-green pointer" onClick={() => this.navTo.emit(({table: 'purchases'} as any))}>Purchases</li>
+            <li class="menu-item mb2 mt2 pl2 hover-light-green pointer" onClick={() => window.location.href = window.location.origin + '/gqa-admin/purchases/'}>Purchases</li>
           </ul>
         </li>
       </ul>
