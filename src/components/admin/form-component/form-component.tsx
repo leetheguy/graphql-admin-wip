@@ -140,7 +140,7 @@ export class FormComponent {
 
         case 'datetime-local':
           let date = moment.utc(this.data[field.dataName]).format('YYYY-MM-DD').toString();
-          let time = moment.utc(this.data[field.dataName]).format('hh:mm:ss').toString();
+          let time = moment.utc(this.data[field.dataName]).format('HH:mm:ss').toString();
           element = 
             <ion-col size={colSize}>
               <ion-row>
@@ -155,9 +155,9 @@ export class FormComponent {
                       value={date}
                       debounce={500}
                       onIonInput={(event: any) => {
-                        let oldDate = moment.utc(this.data[field.dataName])
+                        // let oldDate = moment.utc(this.data[field.dataName])
                         let newDate = moment.utc(event.srcElement.value)
-                        this.data[field.dataName] = oldDate
+                        this.data[field.dataName] = newDate
                           .set({year: newDate.year(), month: newDate.month(), date: newDate.date()})
                           .format();
                         this.modelUpdated.emit({side: this.side, model: this.model} as any);
@@ -175,11 +175,12 @@ export class FormComponent {
                       autofocus={field.order == 0}
                       name={field.dataName}
                       value={time}
-                      debounce={500}
+                      debounce={2000}
                       onIonInput={(event: any) => {
-                        let oldDate = moment.utc(this.data[field.dataName])
-                        let newDate = moment.utc(event.srcElement.value, 'hh:mm:ss')
-                        this.data[field.dataName] = oldDate
+                        // let oldDate = moment.utc(this.data[field.dataName])
+                        let newDate = moment.utc(event.srcElement.value, 'hh:mm:ss a')
+                        console.info(newDate)
+                        this.data[field.dataName] = newDate
                           .set({hour: newDate.hour(), minute: newDate.minute(), second: newDate.second()})
                           .format();
                         this.modelUpdated.emit({side: this.side, model: this.model} as any);
