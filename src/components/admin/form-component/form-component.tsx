@@ -202,7 +202,9 @@ export class FormComponent {
               name={field.dataName}
               value={this.data[field.dataName]}
               onIonInput={(event: any) => {
-                this.data[field.dataName] = event.detail.value;
+                console.info(event.srcElement.value, event.detail.value)
+                this.data[field.dataName] = event.srcElement.value;
+                // this.data[field.dataName] = event.detail.value;
                 this.modelUpdated.emit({side: this.side, model: this.model} as any);
               }}
               debounce={500}/>
