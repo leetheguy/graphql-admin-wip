@@ -1,17 +1,17 @@
 import { createStore, Reducer, Store, combineReducers } from 'redux';
 
 import _ from "lodash";
-import { GQAWebService } from './GQAWebService';
-import { GQAModel } from './GQAModel';
+import { GAWebService } from './GAWebService';
+import { GAModel } from './GAModel';
 
-export class GQAAppState {
+export class GAState {
   public store: Store;
 
   constructor() {
     this.store = createStore(this.rootReducer);
   }
 
-  webService(state = new GQAWebService) {
+  webService(state = new GAWebService) {
     return state;
   }
 

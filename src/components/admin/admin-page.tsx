@@ -1,22 +1,22 @@
 import { Component, Listen, State, Element } from '@stencil/core';
 
-import { GQAWebService } from './utils/GQAWebService';
-import { GQADataNav } from './utils/GQADataNav';
-import { GQAAppState } from './utils/GQAAppState';
-import { GQAModel } from './utils/GQAModel';
+import { GAWebService } from './utils/GAWebService';
+import { GADataNav } from './utils/GADataNav';
+import { GAState } from './utils/GAState';
+import { GAModel } from './utils/GAModel';
 
 import _ from 'lodash';
 
 @Component({
-  tag: 'gqa-admin-page',
+  tag: 'ga-admin-page',
   styleUrl: 'admin-page.css'
 })
 export class AdminPage {
   @Element() el!: HTMLStencilElement;
 
-  @State() models: Array<GQAModel>;
-  @State() leftModel: GQAModel;
-  @State() rightModel: GQAModel;
+  @State() models: Array<GAModel>;
+  @State() leftModel: GAModel;
+  @State() rightModel: GAModel;
   @State() content: any;
 
   @Listen('navTo')
@@ -84,13 +84,13 @@ export class AdminPage {
     this.updateModels();
   }
 
-  appState: GQAAppState;
-  webService: GQAWebService;
-  navigation: GQADataNav;
+  appState: GAState;
+  webService: GAWebService;
+  navigation: GADataNav;
 
   async componentWillLoad() {
-    this.appState = new GQAAppState();
-    this.navigation = new GQADataNav(this.appState);
+    this.appState = new GAState();
+    this.navigation = new GADataNav(this.appState);
     this.webService = this.currentState.webService;
 
     await this.webService.init();
@@ -107,11 +107,11 @@ export class AdminPage {
 
   updateModels() {
     this.models = _.takeRight(this.currentState.models, 2)
-    this.leftModel = new GQAModel(this.appState, this.models[0].table);
+    this.leftModel = new GAModel(this.appState, this.models[0].table);
     this.leftModel.item = this.models[0].item;
     this.leftModel.list = this.models[0].list;
     if(this.models[1]) {
-      this.rightModel = new GQAModel(this.appState, this.models[1].table);
+      this.rightModel = new GAModel(this.appState, this.models[1].table);
       this.rightModel.item = this.models[1].item;
       this.rightModel.list = this.models[1].list;
     }
@@ -125,21 +125,21 @@ export class AdminPage {
       <ion-grid>
         <ion-row>
           <ion-col>
-            <gqa-form-component appState={this.appState} model={this.leftModel} side="left"/>
+            <ga-form-component appState={this.appState} model={this.leftModel} side="left"/>
           </ion-col>
           {!!this.rightModel ? 
             <ion-col>
-              <gqa-form-component appState={this.appState} model={this.rightModel} side="right"/>
+              <ga-form-component appState={this.appState} model={this.rightModel} side="right"/>
             </ion-col>
           : ''}
         </ion-row>
         <ion-row>
           <ion-col>
-            <gqa-list-component appState={this.appState} model={this.leftModel} side="left"/>
+            <ga-list-component appState={this.appState} model={this.leftModel} side="left"/>
           </ion-col>
           {!!this.rightModel ? 
             <ion-col>
-              <gqa-list-component appState={this.appState} model={this.rightModel} side="right"/>
+              <ga-list-component appState={this.appState} model={this.rightModel} side="right"/>
             </ion-col>
           : ''}
         </ion-row>
@@ -148,12 +148,12 @@ export class AdminPage {
 
   render() {
     return [
-      <gqa-header/>,
+      <ga-header/>,
       <ion-content>
         <ion-grid no-padding class="h-100">
           <ion-row class="h-100">
             <ion-col size="2" no-padding class="bg-dark-gray near-white h-100">
-              <gqa-admin-menu/>
+              <ga-admin-menu/>
             </ion-col>
             <ion-col size="10">
               {this.content}

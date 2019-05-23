@@ -1,28 +1,28 @@
 import { Component, Prop, State, Listen } from '@stencil/core';
 // import { EventEmitter } from 'events';
-import { GQAAppState } from '../utils/GQAAppState';
-import { GQAModel } from '../utils/GQAModel';
-import { GQATable } from '../utils/GQAWebService';
+import { GAState } from '../utils/GAState';
+import { GAModel } from '../utils/GAModel';
+import { GATable } from '../utils/GAWebService';
 
 @Component({
-  tag: 'gqa-main-view',
+  tag: 'ga-main-view',
   styleUrl: 'main-view.css'
 })
 export class MainView {
   @Prop() side: String;
-  @Prop() appState: GQAAppState;
-  @Prop() model: GQAModel;
+  @Prop() appState: GAState;
+  @Prop() model: GAModel;
 
-  @State() table: GQATable;
+  @State() table: GATable;
 
   async componentWillLoad() { }
 
   render() {
     return [
       <div>
-        <gqa-form-component appState={this.appState} side={this.side} model={this.model}/>
+        <ga-form-component appState={this.appState} side={this.side} model={this.model}/>
 
-        <gqa-list-component appState={this.appState} model={this.model} side={this.side}/>
+        <ga-list-component appState={this.appState} model={this.model} side={this.side}/>
       </div>
     ];
   }

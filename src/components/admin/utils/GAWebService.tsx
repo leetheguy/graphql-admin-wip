@@ -1,4 +1,5 @@
-const url = 'https://wylde-heart.herokuapp.com/v1alpha1/graphql';
+//TODO This should be a variable passed in from a prop.
+const url = 'https://captain-cecil.herokuapp.com/v1alpha1/graphql';
 
 import axios from 'axios';
 import _ from 'lodash';
@@ -6,9 +7,9 @@ import _ from 'lodash';
 export const COLUMN_WIDTH_HIDDEN = -1;
 export const COLUMN_WIDTH_DEFAULT = 0;
 
-export class GQAWebService {
+export class GAWebService {
   url = url;
-  tables: Array<GQATable> = [];
+  tables: Array<GATable> = [];
   loading = true;
 
   createError = '';
@@ -29,7 +30,7 @@ export class GQAWebService {
   }
 
   buildTables = (result) => {
-    this.tables = _.map(result.data.data.gqa_tables, table => new GQATable(table));
+    this.tables = _.map(result.data.data.gqa_tables, table => new GATable(table));
   }
 
   private async runTablelessListQuery(tableName: string, fields: string) {
@@ -37,17 +38,17 @@ export class GQAWebService {
     return await axios.post(this.url, {query: query});
   }
 
-  async runListQuery(table: GQATable) {
+  async runListQuery(table: GATable) {
     let query = `{ ${table.dataName} ${table.getFieldsAsGQLString()} }`;
     return await axios.post(this.url, {query: query});
   }
 
-  async runItemQuery(table: GQATable, id: any) {
+  async runItemQuery(table: GATable, id: any) {
     let query = `{ ${table.dataName}(where: {id: {_eq: ${id}}}) ${table.getFieldsAsGQLString()} }`;
     return await axios.post(this.url, {query: query})
   }
 
-  async runInsertMutation(table: GQATable, data: any) {
+  async runInsertMutation(table: GATable, data: any) {
     data = _.omit(data, 'id');
 
     let query = `
@@ -61,7 +62,7 @@ export class GQAWebService {
     return await axios.post(this.url, {query: query, variables: {objects: data}})
   }
 
-  async runUpdateMutation(table: GQATable, data: any) {
+  async runUpdateMutation(table: GATable, data: any) {
     let query = `
       mutation update_${table.dataName}($id: Int, $changes: ${table.dataName}_set_input) {
         update_${table.dataName}(where: {id: {_eq: $id}}, _set: $changes) {
@@ -74,7 +75,7 @@ export class GQAWebService {
     return await axios.post(this.url, {query: query, variables: {id: data.id, changes: data}})
   }
 
-  async runDeleteMutation(table: GQATable, data: any) {
+  async runDeleteMutation(table: GATable, data: any) {
     let query = `
       mutation {
         delete_${table.dataName}(where: {id: {_eq: ${data.id}}})
@@ -92,7 +93,7 @@ export class GQAWebService {
   }
 }
 
-export class GQAField {
+export class GAField {
   readonly allowedInputTypes = ['button', 'checkbox', 'color', 'date', 'datetime-local', 'email', 'file', 'table', 'hidden', 'image', 'month', 'number', 'password', 'radio', 'range', 'reset', 'search', 'submit', 'tel', 'text', 'time', 'url', 'week'];
 
   dataName: string;
@@ -118,9 +119,9 @@ export class GQAField {
   }
 }
 
-export class GQATable {
+export class GATable {
   dataName: string;
-  fields: Array<GQAField> = [];
+  fields: Array<GAField> = [];
   pluralName: string;
   singularName: string;
 
@@ -128,7 +129,7 @@ export class GQATable {
     this.dataName = table.dataName;
     this.pluralName = table.pluralName;
     this.singularName = table.singularName;
-    _.each(table.fields, field => this.fields.push(new GQAField(field)));
+    _.each(table.fields, field => this.fields.push(new GAField(field)));
   }
 
   getFieldsAsGQLString() {

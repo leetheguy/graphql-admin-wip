@@ -1,12 +1,14 @@
-import { GQAWebService, GQATable } from "./GQAWebService";
-import { GQAModel } from './GQAModel';
-import { GQAAppState } from './GQAAppState';
+//TODO URL should be passed in as a string through a prop.
+//TODO This should not interfere with the actual URL.
+import { GAWebService, GATable } from "./GAWebService";
+import { GAModel } from './GAModel';
+import { GAState } from './GAState';
 
 import _ from 'lodash';
 
-export class GQADataNav {
-  webService: GQAWebService;
-  appState: GQAAppState;
+export class GADataNav {
+  webService: GAWebService;
+  appState: GAState;
 
   constructor(appState) {
     this.appState = appState;
@@ -14,14 +16,14 @@ export class GQADataNav {
   }
 
   async buildDataFromUrl() {
-    let model: GQAModel;
-    let models: Array<GQAModel> = [];
+    let model: GAModel;
+    let models: Array<GAModel> = [];
     let path = _(window.location.pathname).split('/').compact().drop().value();
 
     // This for loop is needed to maintain async.
     for(const part of path) {
       if(this.webService.getTableByName(part)) {
-        model = new GQAModel(this.appState, this.webService.getTableByName(part));
+        model = new GAModel(this.appState, this.webService.getTableByName(part));
         await model.getListData();
         models.push(model);
       } else if(!!Number(part)) {
@@ -34,7 +36,7 @@ export class GQADataNav {
   }
 
   async resetPages(tableName: string, id = 0) {
-    let model = new GQAModel(this.appState, this.webService.getTableByName(tableName));
+    let model = new GAModel(this.appState, this.webService.getTableByName(tableName));
     await model.getListData();
     if(id) await model.getItemData(id);
     this.appState.store.dispatch({type: 'reset_model', model: model});
@@ -42,7 +44,7 @@ export class GQADataNav {
   }
 
   async pushPage(tableName: string, id = 0) {
-    let model = new GQAModel(this.appState, this.webService.getTableByName(tableName));
+    let model = new GAModel(this.appState, this.webService.getTableByName(tableName));
     await model.getListData();
     if(id) await model.getItemData(id);
     this.appState.store.dispatch({type: 'push_model', model: model})
@@ -60,7 +62,7 @@ export class GQADataNav {
       return model.table.dataName + (model.item.id ? '/' + model.item.id : '');
     })
     .join('/');
-    history.pushState(null, model.table.singularName, '/gqa-admin/' + stateString + '/');
+    history.pushState(null, model.table.singularName, '/ga-admin/' + stateString + '/');
   }
 
   get currentState() { return this.appState.store.getState() }

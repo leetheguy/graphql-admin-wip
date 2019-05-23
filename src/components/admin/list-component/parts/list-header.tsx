@@ -1,7 +1,7 @@
 import { Component } from '@stencil/core';
 
 @Component({
-  tag: 'gqa-list-header',
+  tag: 'ga-list-header',
   styleUrl: '../list-component.css'
 })
 export class ListHeader {

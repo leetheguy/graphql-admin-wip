@@ -1,20 +1,20 @@
 import { Component, State, Prop, Event, Watch } from '@stencil/core';
-import { GQAModel } from '../utils/GQAModel';
-import { GQATable } from '../utils/GQAWebService';
-import { GQAAppState } from '../utils/GQAAppState';
+import { GAModel } from '../utils/GAModel';
+import { GATable } from '../utils/GAWebService';
+import { GAState } from '../utils/GAState';
 
 import _ from 'lodash';
 import moment from 'moment';
 import { EventEmitter } from 'events';
 
 @Component({
-  tag: 'gqa-list-component',
+  tag: 'ga-list-component',
   styleUrl: 'list-component.css'
 })
 export class ListComponent {
   @Prop() side: String;
-  @Prop() appState: GQAAppState;
-  @Prop() model: GQAModel;
+  @Prop() appState: GAState;
+  @Prop() model: GAModel;
   @Watch('model') 
   watchModelHandler() { 
     this.buildList();
@@ -23,7 +23,7 @@ export class ListComponent {
   @Event() leftRowSelected: EventEmitter;
   @Event() rightRowSelected: EventEmitter;
 
-  @State() table: GQATable;
+  @State() table: GATable;
   @State() data: any;
   @State() editing: boolean;
   @State() list: Array<object> = [];
@@ -88,7 +88,7 @@ export class ListComponent {
       let bgColor = index % 2 ? 'bg-lightest-blue' : '';
 
       let element =
-        <ion-row class={bgColor + ' gqa-table-row'} onClick={() => {
+        <ion-row class={bgColor + ' ga-table-row'} onClick={() => {
           let data = ({table: this.table.dataName, id: row.id, side: this.side} as any);
           this.side == 'left'
           ? this.leftRowSelected.emit(data)

@@ -1,17 +1,17 @@
-import { GQAWebService, GQATable } from "./GQAWebService";
+import { GAWebService, GATable as GATable } from "./GAWebService";
 
 import _ from 'lodash';
-import { GQAAppState } from './GQAAppState';
+import { GAState as GAAppState } from './GAState';
 
-export class GQAModel {
-  appState: GQAAppState;
-  webService: GQAWebService;
-  table: GQATable;
+export class GAModel {
+  appState: GAAppState;
+  webService: GAWebService;
+  table: GATable;
 
   list: any = null;
   item: any = {};
 
-  constructor(appState: GQAAppState, table: GQATable) {
+  constructor(appState: GAAppState, table: GATable) {
     this.appState = appState;
     this.webService = this.currentState.webService;
     this.table = table;

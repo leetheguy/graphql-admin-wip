@@ -1,7 +1,7 @@
 import { Component } from '@stencil/core';
 
 @Component({
-  tag: 'gqa-header',
+  tag: 'ga-header',
 })
 export class AdminMenu {
   render() {

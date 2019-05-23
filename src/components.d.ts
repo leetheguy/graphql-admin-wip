@@ -10,171 +10,171 @@ import '@stencil/core';
 import '@ionic/core';
 import 'ionicons';
 import {
-  GQAAppState,
-} from './components/admin/utils/GQAAppState';
+  GAState,
+} from './components/admin/utils/GAState';
 import {
-  GQAModel,
-} from './components/admin/utils/GQAModel';
+  GAModel,
+} from './components/admin/utils/GAModel';
 
 
 export namespace Components {
 
-  interface GqaAdminPage {}
-  interface GqaAdminPageAttributes extends StencilHTMLAttributes {}
+  interface GaAdminPage {}
+  interface GaAdminPageAttributes extends StencilHTMLAttributes {}
 
-  interface GqaErrorView {}
-  interface GqaErrorViewAttributes extends StencilHTMLAttributes {}
+  interface GaErrorView {}
+  interface GaErrorViewAttributes extends StencilHTMLAttributes {}
 
-  interface GqaFormComponent {
-    'appState': GQAAppState;
-    'model': GQAModel;
+  interface GaFormComponent {
+    'appState': GAState;
+    'model': GAModel;
     'side': String;
   }
-  interface GqaFormComponentAttributes extends StencilHTMLAttributes {
-    'appState'?: GQAAppState;
-    'model'?: GQAModel;
+  interface GaFormComponentAttributes extends StencilHTMLAttributes {
+    'appState'?: GAState;
+    'model'?: GAModel;
     'onFormSubmittedEvent'?: (event: CustomEvent) => void;
     'onModelUpdated'?: (event: CustomEvent) => void;
     'onSubTableSelected'?: (event: CustomEvent) => void;
     'side'?: String;
   }
 
-  interface GqaErrorMessage {
+  interface GaErrorMessage {
     'error': any;
   }
-  interface GqaErrorMessageAttributes extends StencilHTMLAttributes {
+  interface GaErrorMessageAttributes extends StencilHTMLAttributes {
     'error'?: any;
   }
 
-  interface GqaHeader {}
-  interface GqaHeaderAttributes extends StencilHTMLAttributes {}
+  interface GaHeader {}
+  interface GaHeaderAttributes extends StencilHTMLAttributes {}
 
-  interface GqaListComponent {
-    'appState': GQAAppState;
-    'model': GQAModel;
+  interface GaListComponent {
+    'appState': GAState;
+    'model': GAModel;
     'side': String;
   }
-  interface GqaListComponentAttributes extends StencilHTMLAttributes {
-    'appState'?: GQAAppState;
-    'model'?: GQAModel;
+  interface GaListComponentAttributes extends StencilHTMLAttributes {
+    'appState'?: GAState;
+    'model'?: GAModel;
     'onLeftRowSelected'?: (event: CustomEvent) => void;
     'onRightRowSelected'?: (event: CustomEvent) => void;
     'side'?: String;
   }
 
-  interface GqaListHeader {}
-  interface GqaListHeaderAttributes extends StencilHTMLAttributes {}
+  interface GaListHeader {}
+  interface GaListHeaderAttributes extends StencilHTMLAttributes {}
 
-  interface GqaListItemComponent {}
-  interface GqaListItemComponentAttributes extends StencilHTMLAttributes {}
+  interface GaListItemComponent {}
+  interface GaListItemComponentAttributes extends StencilHTMLAttributes {}
 
-  interface GqaMainView {
-    'appState': GQAAppState;
-    'model': GQAModel;
+  interface GaMainView {
+    'appState': GAState;
+    'model': GAModel;
     'side': String;
   }
-  interface GqaMainViewAttributes extends StencilHTMLAttributes {
-    'appState'?: GQAAppState;
-    'model'?: GQAModel;
+  interface GaMainViewAttributes extends StencilHTMLAttributes {
+    'appState'?: GAState;
+    'model'?: GAModel;
     'side'?: String;
   }
 
   interface AppRoot {}
   interface AppRootAttributes extends StencilHTMLAttributes {}
 
-  interface GqaDashboardPage {}
-  interface GqaDashboardPageAttributes extends StencilHTMLAttributes {}
+  interface GaDashboardPage {}
+  interface GaDashboardPageAttributes extends StencilHTMLAttributes {}
 
-  interface GqaAdminMenu {}
-  interface GqaAdminMenuAttributes extends StencilHTMLAttributes {
+  interface GaAdminMenu {}
+  interface GaAdminMenuAttributes extends StencilHTMLAttributes {
     'onNavTo'?: (event: CustomEvent) => void;
   }
 }
 
 declare global {
   interface StencilElementInterfaces {
-    'GqaAdminPage': Components.GqaAdminPage;
-    'GqaErrorView': Components.GqaErrorView;
-    'GqaFormComponent': Components.GqaFormComponent;
-    'GqaErrorMessage': Components.GqaErrorMessage;
-    'GqaHeader': Components.GqaHeader;
-    'GqaListComponent': Components.GqaListComponent;
-    'GqaListHeader': Components.GqaListHeader;
-    'GqaListItemComponent': Components.GqaListItemComponent;
-    'GqaMainView': Components.GqaMainView;
+    'GaAdminPage': Components.GaAdminPage;
+    'GaErrorView': Components.GaErrorView;
+    'GaFormComponent': Components.GaFormComponent;
+    'GaErrorMessage': Components.GaErrorMessage;
+    'GaHeader': Components.GaHeader;
+    'GaListComponent': Components.GaListComponent;
+    'GaListHeader': Components.GaListHeader;
+    'GaListItemComponent': Components.GaListItemComponent;
+    'GaMainView': Components.GaMainView;
     'AppRoot': Components.AppRoot;
-    'GqaDashboardPage': Components.GqaDashboardPage;
-    'GqaAdminMenu': Components.GqaAdminMenu;
+    'GaDashboardPage': Components.GaDashboardPage;
+    'GaAdminMenu': Components.GaAdminMenu;
   }
 
   interface StencilIntrinsicElements {
-    'gqa-admin-page': Components.GqaAdminPageAttributes;
-    'gqa-error-view': Components.GqaErrorViewAttributes;
-    'gqa-form-component': Components.GqaFormComponentAttributes;
-    'gqa-error-message': Components.GqaErrorMessageAttributes;
-    'gqa-header': Components.GqaHeaderAttributes;
-    'gqa-list-component': Components.GqaListComponentAttributes;
-    'gqa-list-header': Components.GqaListHeaderAttributes;
-    'gqa-list-item-component': Components.GqaListItemComponentAttributes;
-    'gqa-main-view': Components.GqaMainViewAttributes;
+    'ga-admin-page': Components.GaAdminPageAttributes;
+    'ga-error-view': Components.GaErrorViewAttributes;
+    'ga-form-component': Components.GaFormComponentAttributes;
+    'ga-error-message': Components.GaErrorMessageAttributes;
+    'ga-header': Components.GaHeaderAttributes;
+    'ga-list-component': Components.GaListComponentAttributes;
+    'ga-list-header': Components.GaListHeaderAttributes;
+    'ga-list-item-component': Components.GaListItemComponentAttributes;
+    'ga-main-view': Components.GaMainViewAttributes;
     'app-root': Components.AppRootAttributes;
-    'gqa-dashboard-page': Components.GqaDashboardPageAttributes;
-    'gqa-admin-menu': Components.GqaAdminMenuAttributes;
+    'ga-dashboard-page': Components.GaDashboardPageAttributes;
+    'ga-admin-menu': Components.GaAdminMenuAttributes;
   }
 
 
-  interface HTMLGqaAdminPageElement extends Components.GqaAdminPage, HTMLStencilElement {}
-  var HTMLGqaAdminPageElement: {
-    prototype: HTMLGqaAdminPageElement;
-    new (): HTMLGqaAdminPageElement;
+  interface HTMLGaAdminPageElement extends Components.GaAdminPage, HTMLStencilElement {}
+  var HTMLGaAdminPageElement: {
+    prototype: HTMLGaAdminPageElement;
+    new (): HTMLGaAdminPageElement;
   };
 
-  interface HTMLGqaErrorViewElement extends Components.GqaErrorView, HTMLStencilElement {}
-  var HTMLGqaErrorViewElement: {
-    prototype: HTMLGqaErrorViewElement;
-    new (): HTMLGqaErrorViewElement;
+  interface HTMLGaErrorViewElement extends Components.GaErrorView, HTMLStencilElement {}
+  var HTMLGaErrorViewElement: {
+    prototype: HTMLGaErrorViewElement;
+    new (): HTMLGaErrorViewElement;
   };
 
-  interface HTMLGqaFormComponentElement extends Components.GqaFormComponent, HTMLStencilElement {}
-  var HTMLGqaFormComponentElement: {
-    prototype: HTMLGqaFormComponentElement;
-    new (): HTMLGqaFormComponentElement;
+  interface HTMLGaFormComponentElement extends Components.GaFormComponent, HTMLStencilElement {}
+  var HTMLGaFormComponentElement: {
+    prototype: HTMLGaFormComponentElement;
+    new (): HTMLGaFormComponentElement;
   };
 
-  interface HTMLGqaErrorMessageElement extends Components.GqaErrorMessage, HTMLStencilElement {}
-  var HTMLGqaErrorMessageElement: {
-    prototype: HTMLGqaErrorMessageElement;
-    new (): HTMLGqaErrorMessageElement;
+  interface HTMLGaErrorMessageElement extends Components.GaErrorMessage, HTMLStencilElement {}
+  var HTMLGaErrorMessageElement: {
+    prototype: HTMLGaErrorMessageElement;
+    new (): HTMLGaErrorMessageElement;
   };
 
-  interface HTMLGqaHeaderElement extends Components.GqaHeader, HTMLStencilElement {}
-  var HTMLGqaHeaderElement: {
-    prototype: HTMLGqaHeaderElement;
-    new (): HTMLGqaHeaderElement;
+  interface HTMLGaHeaderElement extends Components.GaHeader, HTMLStencilElement {}
+  var HTMLGaHeaderElement: {
+    prototype: HTMLGaHeaderElement;
+    new (): HTMLGaHeaderElement;
   };
 
-  interface HTMLGqaListComponentElement extends Components.GqaListComponent, HTMLStencilElement {}
-  var HTMLGqaListComponentElement: {
-    prototype: HTMLGqaListComponentElement;
-    new (): HTMLGqaListComponentElement;
+  interface HTMLGaListComponentElement extends Components.GaListComponent, HTMLStencilElement {}
+  var HTMLGaListComponentElement: {
+    prototype: HTMLGaListComponentElement;
+    new (): HTMLGaListComponentElement;
   };
 
-  interface HTMLGqaListHeaderElement extends Components.GqaListHeader, HTMLStencilElement {}
-  var HTMLGqaListHeaderElement: {
-    prototype: HTMLGqaListHeaderElement;
-    new (): HTMLGqaListHeaderElement;
+  interface HTMLGaListHeaderElement extends Components.GaListHeader, HTMLStencilElement {}
+  var HTMLGaListHeaderElement: {
+    prototype: HTMLGaListHeaderElement;
+    new (): HTMLGaListHeaderElement;
   };
 
-  interface HTMLGqaListItemComponentElement extends Components.GqaListItemComponent, HTMLStencilElement {}
-  var HTMLGqaListItemComponentElement: {
-    prototype: HTMLGqaListItemComponentElement;
-    new (): HTMLGqaListItemComponentElement;
+  interface HTMLGaListItemComponentElement extends Components.GaListItemComponent, HTMLStencilElement {}
+  var HTMLGaListItemComponentElement: {
+    prototype: HTMLGaListItemComponentElement;
+    new (): HTMLGaListItemComponentElement;
   };
 
-  interface HTMLGqaMainViewElement extends Components.GqaMainView, HTMLStencilElement {}
-  var HTMLGqaMainViewElement: {
-    prototype: HTMLGqaMainViewElement;
-    new (): HTMLGqaMainViewElement;
+  interface HTMLGaMainViewElement extends Components.GaMainView, HTMLStencilElement {}
+  var HTMLGaMainViewElement: {
+    prototype: HTMLGaMainViewElement;
+    new (): HTMLGaMainViewElement;
   };
 
   interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {}
@@ -183,46 +183,46 @@ declare global {
     new (): HTMLAppRootElement;
   };
 
-  interface HTMLGqaDashboardPageElement extends Components.GqaDashboardPage, HTMLStencilElement {}
-  var HTMLGqaDashboardPageElement: {
-    prototype: HTMLGqaDashboardPageElement;
-    new (): HTMLGqaDashboardPageElement;
+  interface HTMLGaDashboardPageElement extends Components.GaDashboardPage, HTMLStencilElement {}
+  var HTMLGaDashboardPageElement: {
+    prototype: HTMLGaDashboardPageElement;
+    new (): HTMLGaDashboardPageElement;
   };
 
-  interface HTMLGqaAdminMenuElement extends Components.GqaAdminMenu, HTMLStencilElement {}
-  var HTMLGqaAdminMenuElement: {
-    prototype: HTMLGqaAdminMenuElement;
-    new (): HTMLGqaAdminMenuElement;
+  interface HTMLGaAdminMenuElement extends Components.GaAdminMenu, HTMLStencilElement {}
+  var HTMLGaAdminMenuElement: {
+    prototype: HTMLGaAdminMenuElement;
+    new (): HTMLGaAdminMenuElement;
   };
 
   interface HTMLElementTagNameMap {
-    'gqa-admin-page': HTMLGqaAdminPageElement
-    'gqa-error-view': HTMLGqaErrorViewElement
-    'gqa-form-component': HTMLGqaFormComponentElement
-    'gqa-error-message': HTMLGqaErrorMessageElement
-    'gqa-header': HTMLGqaHeaderElement
-    'gqa-list-component': HTMLGqaListComponentElement
-    'gqa-list-header': HTMLGqaListHeaderElement
-    'gqa-list-item-component': HTMLGqaListItemComponentElement
-    'gqa-main-view': HTMLGqaMainViewElement
+    'ga-admin-page': HTMLGaAdminPageElement
+    'ga-error-view': HTMLGaErrorViewElement
+    'ga-form-component': HTMLGaFormComponentElement
+    'ga-error-message': HTMLGaErrorMessageElement
+    'ga-header': HTMLGaHeaderElement
+    'ga-list-component': HTMLGaListComponentElement
+    'ga-list-header': HTMLGaListHeaderElement
+    'ga-list-item-component': HTMLGaListItemComponentElement
+    'ga-main-view': HTMLGaMainViewElement
     'app-root': HTMLAppRootElement
-    'gqa-dashboard-page': HTMLGqaDashboardPageElement
-    'gqa-admin-menu': HTMLGqaAdminMenuElement
+    'ga-dashboard-page': HTMLGaDashboardPageElement
+    'ga-admin-menu': HTMLGaAdminMenuElement
   }
 
   interface ElementTagNameMap {
-    'gqa-admin-page': HTMLGqaAdminPageElement;
-    'gqa-error-view': HTMLGqaErrorViewElement;
-    'gqa-form-component': HTMLGqaFormComponentElement;
-    'gqa-error-message': HTMLGqaErrorMessageElement;
-    'gqa-header': HTMLGqaHeaderElement;
-    'gqa-list-component': HTMLGqaListComponentElement;
-    'gqa-list-header': HTMLGqaListHeaderElement;
-    'gqa-list-item-component': HTMLGqaListItemComponentElement;
-    'gqa-main-view': HTMLGqaMainViewElement;
+    'ga-admin-page': HTMLGaAdminPageElement;
+    'ga-error-view': HTMLGaErrorViewElement;
+    'ga-form-component': HTMLGaFormComponentElement;
+    'ga-error-message': HTMLGaErrorMessageElement;
+    'ga-header': HTMLGaHeaderElement;
+    'ga-list-component': HTMLGaListComponentElement;
+    'ga-list-header': HTMLGaListHeaderElement;
+    'ga-list-item-component': HTMLGaListItemComponentElement;
+    'ga-main-view': HTMLGaMainViewElement;
     'app-root': HTMLAppRootElement;
-    'gqa-dashboard-page': HTMLGqaDashboardPageElement;
-    'gqa-admin-menu': HTMLGqaAdminMenuElement;
+    'ga-dashboard-page': HTMLGaDashboardPageElement;
+    'ga-admin-menu': HTMLGaAdminMenuElement;
   }
 
 

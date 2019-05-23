@@ -1,7 +1,7 @@
 import { Component, Prop } from '@stencil/core';
 
 @Component({
-  tag: 'gqa-error-message',
+  tag: 'ga-error-message',
 })
 export class FormComponent {
   @Prop() error: any;

@@ -1,7 +1,7 @@
 import { Component } from '@stencil/core';
 
 @Component({
-  tag: 'gqa-error-view',
+  tag: 'ga-error-view',
   styleUrl: 'error-view.css'
 })
 export class ErrorView {

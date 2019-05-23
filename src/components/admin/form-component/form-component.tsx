@@ -1,7 +1,7 @@
 import { Component, Prop, State, Event, Watch } from '@stencil/core';
-import { GQAAppState } from '../utils/GQAAppState';
-import { GQAModel } from '../utils/GQAModel';
-import { GQATable } from '../utils/GQAWebService';
+import { GAState } from '../utils/GAState';
+import { GAModel } from '../utils/GAModel';
+import { GATable } from '../utils/GAWebService';
 
 import _ from 'lodash';
 import moment from 'moment';
@@ -9,13 +9,13 @@ import Quill from 'quill'
 import { EventEmitter } from 'events';
 
 @Component({
-  tag: 'gqa-form-component',
+  tag: 'ga-form-component',
   styleUrl: 'form-component.css'
 })
 export class FormComponent {
   @Prop() side: String;
-  @Prop() appState: GQAAppState;
-  @Prop() model: GQAModel;
+  @Prop() appState: GAState;
+  @Prop() model: GAModel;
   @Watch('model') 
   watchModelHandler() {
     console.info('model changed')
@@ -26,7 +26,7 @@ export class FormComponent {
   @Event() formSubmittedEvent: EventEmitter;
   @Event() modelUpdated: EventEmitter;
 
-  @State() table: GQATable;
+  @State() table: GATable;
   @State() data: any;
   @State() elements = [];
   @State() editing: boolean;
