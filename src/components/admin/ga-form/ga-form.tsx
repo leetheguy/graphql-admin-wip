@@ -1,7 +1,7 @@
 import { Component, Prop, State, Event, Watch } from '@stencil/core';
-import { GAState } from '../utils/GAState';
-import { GAModel } from '../utils/GAModel';
-import { GATable } from '../utils/GAWebService';
+import { GAState } from '../ga-utils/GAState';
+import { GAModel } from '../ga-utils/GAModel';
+import { GATable } from '../ga-utils/GAWebService';
 
 import _ from 'lodash';
 import moment from 'moment';
@@ -9,8 +9,8 @@ import Quill from 'quill'
 import { EventEmitter } from 'events';
 
 @Component({
-  tag: 'ga-form-component',
-  styleUrl: 'form-component.css'
+  tag: 'ga-form',
+  styleUrl: 'ga-form.css'
 })
 export class FormComponent {
   @Prop() side: String;

@@ -1,15 +1,15 @@
 import { Component, State, Prop, Event, Watch } from '@stencil/core';
-import { GAModel } from '../utils/GAModel';
-import { GATable } from '../utils/GAWebService';
-import { GAState } from '../utils/GAState';
+import { GAModel } from '../ga-utils/GAModel';
+import { GATable } from '../ga-utils/GAWebService';
+import { GAState } from '../ga-utils/GAState';
 
 import _ from 'lodash';
 import moment from 'moment';
 import { EventEmitter } from 'events';
 
 @Component({
-  tag: 'ga-list-component',
-  styleUrl: 'list-component.css'
+  tag: 'ga-list',
+  styleUrl: 'ga-list.css'
 })
 export class ListComponent {
   @Prop() side: String;

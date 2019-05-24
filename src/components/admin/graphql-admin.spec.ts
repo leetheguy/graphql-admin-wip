@@ -1,4 +1,4 @@
-import { AppHome } from './admin-page';
+import { AppHome } from './graphql-admin';
 
 describe('app', () => {
   it('builds', () => {

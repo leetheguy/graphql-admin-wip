@@ -1,8 +1,8 @@
 {
-  "name": "magic-admin",
+  "name": "graphql-admin",
   "private": true,
   "version": "0.0.1",
-  "description": "magic-admin",
+  "description": "graphql-admin",
   "license": "MIT",
   "files": [
     "dist/"

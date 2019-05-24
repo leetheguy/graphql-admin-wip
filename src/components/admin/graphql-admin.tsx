@@ -1,14 +1,14 @@
 import { Component, Listen, State, Element } from '@stencil/core';
 
-import { GAWebService } from './utils/GAWebService';
-import { GADataNav } from './utils/GADataNav';
-import { GAState } from './utils/GAState';
-import { GAModel } from './utils/GAModel';
+import { GAWebService } from './ga-utils/GAWebService';
+import { GADataNav } from './ga-utils/GADataNav';
+import { GAState } from './ga-utils/GAState';
+import { GAModel } from './ga-utils/GAModel';
 
 import _ from 'lodash';
 
 @Component({
-  tag: 'ga-admin-page',
+  tag: 'graphql-admin',
   styleUrl: 'admin-page.css'
 })
 export class AdminPage {
@@ -125,21 +125,21 @@ export class AdminPage {
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ga-form-component appState={this.appState} model={this.leftModel} side="left"/>
+            <ga-form appState={this.appState} model={this.leftModel} side="left"/>
           </ion-col>
           {!!this.rightModel ? 
             <ion-col>
-              <ga-form-component appState={this.appState} model={this.rightModel} side="right"/>
+              <ga-form appState={this.appState} model={this.rightModel} side="right"/>
             </ion-col>
           : ''}
         </ion-row>
         <ion-row>
           <ion-col>
-            <ga-list-component appState={this.appState} model={this.leftModel} side="left"/>
+            <ga-list appState={this.appState} model={this.leftModel} side="left"/>
           </ion-col>
           {!!this.rightModel ? 
             <ion-col>
-              <ga-list-component appState={this.appState} model={this.rightModel} side="right"/>
+              <ga-list appState={this.appState} model={this.rightModel} side="right"/>
             </ion-col>
           : ''}
         </ion-row>
