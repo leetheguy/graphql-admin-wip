@@ -9,7 +9,7 @@ import _ from 'lodash';
 
 @Component({
   tag: 'graphql-admin',
-  styleUrl: 'admin-page.css'
+  styleUrl: 'graphql-admin.css'
 })
 export class AdminPage {
   @Element() el!: HTMLStencilElement;
