@@ -18,7 +18,6 @@ export class FormComponent {
   @Prop() model: GAModel;
   @Watch('model') 
   watchModelHandler() {
-    console.info('model changed')
     this.buildForm();
   }
 
@@ -179,7 +178,6 @@ export class FormComponent {
                       onIonInput={(event: any) => {
                         // let oldDate = moment.utc(this.data[field.dataName])
                         let newDate = moment.utc(event.srcElement.value, 'hh:mm:ss a')
-                        console.info(newDate)
                         this.data[field.dataName] = newDate
                           .set({hour: newDate.hour(), minute: newDate.minute(), second: newDate.second()})
                           .format();
@@ -202,7 +200,6 @@ export class FormComponent {
               name={field.dataName}
               value={this.data[field.dataName]}
               onIonInput={(event: any) => {
-                console.info(event.srcElement.value, event.detail.value)
                 this.data[field.dataName] = event.srcElement.value;
                 // this.data[field.dataName] = event.detail.value;
                 this.modelUpdated.emit({side: this.side, model: this.model} as any);

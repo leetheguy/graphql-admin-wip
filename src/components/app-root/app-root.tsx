@@ -11,8 +11,8 @@ export class AppRoot {
     return (
       <ion-app>
         <ion-router useHash={false}>
-          <ion-route url="/" component="ga-dashboard-page" />
-          <ion-route url="admin/" component="ga-dashboard-page" />
+          <ion-route url="/" component="ga-dashboard" />
+          <ion-route url="admin/" component="ga-dashboard" />
           <ion-route url="admin/:anything" component="graphql-admin" />
         </ion-router>
         <ion-nav />

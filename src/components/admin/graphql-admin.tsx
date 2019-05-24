@@ -121,7 +121,6 @@ export class AdminPage {
   }
 
   buildContent() {
-    console.info('building content')
     this.content = null;
     this.content =
       <ion-grid>
