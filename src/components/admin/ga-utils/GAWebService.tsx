@@ -9,6 +9,8 @@ export const COLUMN_WIDTH_DEFAULT = 0;
 
 export class GAWebService {
   url = url;
+  // static url = '';
+
   tables: Array<GATable> = [];
   loading = true;
 

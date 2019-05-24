@@ -1,6 +1,6 @@
 /* Document Level Styles */
 
-@import "../assets/css/admin/tachyons.min.css";
+@import "../assets/css/tachyons.min.css";
 
 /*
   The imports below are needed to include our light dom css for global styles such as fonts and colors.

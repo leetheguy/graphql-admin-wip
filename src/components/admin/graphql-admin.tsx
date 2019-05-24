@@ -89,6 +89,8 @@ export class AdminPage {
   navigation: GADataNav;
 
   async componentWillLoad() {
+    // GAWebService.url = 'https://captain-cecil.herokuapp.com/v1alpha1/graphql';
+
     this.appState = new GAState();
     this.navigation = new GADataNav(this.appState);
     this.webService = this.currentState.webService;

@@ -1,6 +1,6 @@
 //TODO URL should be passed in as a string through a prop.
 //TODO This should not interfere with the actual URL.
-import { GAWebService, GATable } from "./GAWebService";
+import { GAWebService } from "./GAWebService";
 import { GAModel } from './GAModel';
 import { GAState } from './GAState';
 
@@ -62,7 +62,7 @@ export class GADataNav {
       return model.table.dataName + (model.item.id ? '/' + model.item.id : '');
     })
     .join('/');
-    history.pushState(null, model.table.singularName, '/ga-admin/' + stateString + '/');
+    history.pushState(null, model.table.singularName, '/admin/' + stateString + '/');
   }
 
   get currentState() { return this.appState.store.getState() }

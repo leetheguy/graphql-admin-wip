@@ -52,6 +52,9 @@ export namespace Components {
   interface AppRoot {}
   interface AppRootAttributes extends StencilHTMLAttributes {}
 
+  interface GaDashboard {}
+  interface GaDashboardAttributes extends StencilHTMLAttributes {}
+
   interface GaAdminMenu {}
   interface GaAdminMenuAttributes extends StencilHTMLAttributes {
     'onNavTo'?: (event: CustomEvent) => void;
@@ -64,6 +67,7 @@ declare global {
     'GaList': Components.GaList;
     'GraphqlAdmin': Components.GraphqlAdmin;
     'AppRoot': Components.AppRoot;
+    'GaDashboard': Components.GaDashboard;
     'GaAdminMenu': Components.GaAdminMenu;
   }
 
@@ -72,6 +76,7 @@ declare global {
     'ga-list': Components.GaListAttributes;
     'graphql-admin': Components.GraphqlAdminAttributes;
     'app-root': Components.AppRootAttributes;
+    'ga-dashboard': Components.GaDashboardAttributes;
     'ga-admin-menu': Components.GaAdminMenuAttributes;
   }
 
@@ -100,6 +105,12 @@ declare global {
     new (): HTMLAppRootElement;
   };
 
+  interface HTMLGaDashboardElement extends Components.GaDashboard, HTMLStencilElement {}
+  var HTMLGaDashboardElement: {
+    prototype: HTMLGaDashboardElement;
+    new (): HTMLGaDashboardElement;
+  };
+
   interface HTMLGaAdminMenuElement extends Components.GaAdminMenu, HTMLStencilElement {}
   var HTMLGaAdminMenuElement: {
     prototype: HTMLGaAdminMenuElement;
@@ -111,6 +122,7 @@ declare global {
     'ga-list': HTMLGaListElement
     'graphql-admin': HTMLGraphqlAdminElement
     'app-root': HTMLAppRootElement
+    'ga-dashboard': HTMLGaDashboardElement
     'ga-admin-menu': HTMLGaAdminMenuElement
   }
 
@@ -119,6 +131,7 @@ declare global {
     'ga-list': HTMLGaListElement;
     'graphql-admin': HTMLGraphqlAdminElement;
     'app-root': HTMLAppRootElement;
+    'ga-dashboard': HTMLGaDashboardElement;
     'ga-admin-menu': HTMLGaAdminMenuElement;
   }
 
