@@ -10,9 +10,6 @@ import '@stencil/core';
 import '@ionic/core';
 import 'ionicons';
 import {
-  GAState,
-} from './components/admin/ga-utils/GAState';
-import {
   GAModel,
 } from './components/admin/ga-utils/GAModel';
 
@@ -20,12 +17,10 @@ import {
 export namespace Components {
 
   interface GaForm {
-    'appState': GAState;
     'model': GAModel;
     'side': String;
   }
   interface GaFormAttributes extends StencilHTMLAttributes {
-    'appState'?: GAState;
     'model'?: GAModel;
     'onFormSubmittedEvent'?: (event: CustomEvent) => void;
     'onModelUpdated'?: (event: CustomEvent) => void;
@@ -34,20 +29,22 @@ export namespace Components {
   }
 
   interface GaList {
-    'appState': GAState;
     'model': GAModel;
     'side': String;
   }
   interface GaListAttributes extends StencilHTMLAttributes {
-    'appState'?: GAState;
     'model'?: GAModel;
     'onLeftRowSelected'?: (event: CustomEvent) => void;
     'onRightRowSelected'?: (event: CustomEvent) => void;
     'side'?: String;
   }
 
-  interface GraphqlAdmin {}
-  interface GraphqlAdminAttributes extends StencilHTMLAttributes {}
+  interface GraphqlAdmin {
+    'dataSource': string;
+  }
+  interface GraphqlAdminAttributes extends StencilHTMLAttributes {
+    'dataSource'?: string;
+  }
 
   interface AppRoot {}
   interface AppRootAttributes extends StencilHTMLAttributes {}

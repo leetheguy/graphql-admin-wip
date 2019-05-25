@@ -1,4 +1,4 @@
-import { Component, Listen, State, Element } from '@stencil/core';
+import { Component, Listen, State, Element, Prop } from '@stencil/core';
 
 import { GAWebService } from './ga-utils/GAWebService';
 import { GADataNav } from './ga-utils/GADataNav';
@@ -12,6 +12,8 @@ import _ from 'lodash';
   styleUrl: 'graphql-admin.css'
 })
 export class AdminPage {
+  @Prop() dataSource = 'https://captain-cecil.herokuapp.com/v1alpha1/graphql';
+
   @Element() el!: HTMLStencilElement;
 
   @State() models: Array<GAModel>;
@@ -58,7 +60,7 @@ export class AdminPage {
     });
     let index = this.models.length - 2;
 
-    await this.appState.store.dispatch({type: 'update_model', index: index, model: model})
+    await GAState.appState.store.dispatch({type: 'update_model', index: index, model: model})
     this.updateModels();
   }
 
@@ -68,39 +70,34 @@ export class AdminPage {
     let model = event.detail.model;
     let index = this.models.length - (side == 'left' && this.models.length == 2 ? 2 :  1);
 
-    this.appState.store.dispatch({type: 'update_model', index: index, model: model})
-
-    // _.each(this.currentState.models, model => model.getListData());
-    // await this.navigation.buildDataFromUrl();
+    GAState.appState.store.dispatch({type: 'update_model', index: index, model: model})
 
     this.updateModels();
   }
 
   @Listen('formSubmittedEvent')
   async formSubmittedHandler(event: CustomEvent) {
-    // _.each(this.currentState.models, model => model.getListData());
     await this.navigation.buildDataFromUrl();
 
     this.updateModels();
   }
 
-  appState: GAState;
   webService: GAWebService;
   navigation: GADataNav;
 
   async componentWillLoad() {
-    // GAWebService.url = 'https://captain-cecil.herokuapp.com/v1alpha1/graphql';
+    GAWebService.url = this.dataSource;
+    GAState.appState = new GAState();
 
-    this.appState = new GAState();
-    this.navigation = new GADataNav(this.appState);
-    this.webService = this.currentState.webService;
+    this.navigation = new GADataNav();
+    this.webService = GAState.currentState.webService;
 
     await this.webService.init();
     await this.navigation.buildDataFromUrl();
     this.navigation.rebuildUrl();
 
     window.onpopstate = async () => { 
-      await this.appState.store.dispatch({type: 'pop_model'});
+      await GAState.appState.store.dispatch({type: 'pop_model'});
       this.updateModels();
     }
 
@@ -108,12 +105,12 @@ export class AdminPage {
   }
 
   updateModels() {
-    this.models = _.takeRight(this.currentState.models, 2)
-    this.leftModel = new GAModel(this.appState, this.models[0].table);
+    this.models = _.takeRight(GAState.currentState.models, 2)
+    this.leftModel = new GAModel(this.models[0].table);
     this.leftModel.item = this.models[0].item;
     this.leftModel.list = this.models[0].list;
     if(this.models[1]) {
-      this.rightModel = new GAModel(this.appState, this.models[1].table);
+      this.rightModel = new GAModel(this.models[1].table);
       this.rightModel.item = this.models[1].item;
       this.rightModel.list = this.models[1].list;
     }
@@ -126,21 +123,21 @@ export class AdminPage {
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ga-form appState={this.appState} model={this.leftModel} side="left"/>
+            <ga-form model={this.leftModel} side="left"/>
           </ion-col>
           {!!this.rightModel ? 
             <ion-col>
-              <ga-form appState={this.appState} model={this.rightModel} side="right"/>
+              <ga-form model={this.rightModel} side="right"/>
             </ion-col>
           : ''}
         </ion-row>
         <ion-row>
           <ion-col>
-            <ga-list appState={this.appState} model={this.leftModel} side="left"/>
+            <ga-list model={this.leftModel} side="left"/>
           </ion-col>
           {!!this.rightModel ? 
             <ion-col>
-              <ga-list appState={this.appState} model={this.rightModel} side="right"/>
+              <ga-list model={this.rightModel} side="right"/>
             </ion-col>
           : ''}
         </ion-row>
@@ -164,6 +161,4 @@ export class AdminPage {
       </ion-content>
     ];
   }
-
-  get currentState() { return this.appState.store.getState() }
 }

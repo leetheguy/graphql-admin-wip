@@ -1,19 +1,18 @@
 import { GAWebService, GATable as GATable } from "./GAWebService";
 
 import _ from 'lodash';
-import { GAState as GAAppState } from './GAState';
+import { GAState } from './GAState';
 
 export class GAModel {
-  appState: GAAppState;
+  appState: GAState;
   webService: GAWebService;
   table: GATable;
 
   list: any = null;
   item: any = {};
 
-  constructor(appState: GAAppState, table: GATable) {
-    this.appState = appState;
-    this.webService = this.currentState.webService;
+  constructor(table: GATable) {
+    this.webService = GAState.currentState.webService;
     this.table = table;
     this.item = this.getEmptyData();
   }
@@ -63,6 +62,4 @@ export class GAModel {
     .catch(error => console.error(error));
     return this.item;
   }
-
-  get currentState() { return this.appState.store.getState() }
 }

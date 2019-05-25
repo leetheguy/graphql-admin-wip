@@ -4,6 +4,7 @@ import { GAWebService } from './GAWebService';
 import _ from "lodash";
 
 export class GAState {
+  static appState;
   public store: Store;
 
   constructor() {
@@ -55,4 +56,6 @@ export class GAState {
     webService: this.webService,
     models: this.models,
   });
+
+  static get currentState() { return GAState.appState.store.getState() }
 }

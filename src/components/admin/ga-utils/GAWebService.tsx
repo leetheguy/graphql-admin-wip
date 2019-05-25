@@ -1,6 +1,3 @@
-//TODO This should be a variable passed in from a prop.
-const url = 'https://captain-cecil.herokuapp.com/v1alpha1/graphql';
-
 import axios from 'axios';
 import _ from 'lodash';
 
@@ -8,8 +5,7 @@ export const COLUMN_WIDTH_HIDDEN = -1;
 export const COLUMN_WIDTH_DEFAULT = 0;
 
 export class GAWebService {
-  url = url;
-  // static url = '';
+  static url;
 
   tables: Array<GATable> = [];
   loading = true;
@@ -37,17 +33,17 @@ export class GAWebService {
 
   private async runTablelessListQuery(tableName: string, fields: string) {
     let query = `{ ${tableName} ${fields} }`;
-    return await axios.post(this.url, {query: query});
+    return await axios.post(GAWebService.url, {query: query});
   }
 
   async runListQuery(table: GATable) {
     let query = `{ ${table.dataName} ${table.getFieldsAsGQLString()} }`;
-    return await axios.post(this.url, {query: query});
+    return await axios.post(GAWebService.url, {query: query});
   }
 
   async runItemQuery(table: GATable, id: any) {
     let query = `{ ${table.dataName}(where: {id: {_eq: ${id}}}) ${table.getFieldsAsGQLString()} }`;
-    return await axios.post(this.url, {query: query})
+    return await axios.post(GAWebService.url, {query: query})
   }
 
   async runInsertMutation(table: GATable, data: any) {
@@ -61,7 +57,7 @@ export class GAWebService {
       }
     `;
 
-    return await axios.post(this.url, {query: query, variables: {objects: data}})
+    return await axios.post(GAWebService.url, {query: query, variables: {objects: data}})
   }
 
   async runUpdateMutation(table: GATable, data: any) {
@@ -74,7 +70,7 @@ export class GAWebService {
       }
     `;
 
-    return await axios.post(this.url, {query: query, variables: {id: data.id, changes: data}})
+    return await axios.post(GAWebService.url, {query: query, variables: {id: data.id, changes: data}})
   }
 
   async runDeleteMutation(table: GATable, data: any) {
@@ -87,7 +83,7 @@ export class GAWebService {
       }
     `;
 
-    return await axios.post(this.url, {query: query})
+    return await axios.post(GAWebService.url, {query: query})
   }
 
   getTableByName(name: string) {

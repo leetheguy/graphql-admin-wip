@@ -14,7 +14,6 @@ import { EventEmitter } from 'events';
 })
 export class FormComponent {
   @Prop() side: String;
-  @Prop() appState: GAState;
   @Prop() model: GAModel;
   @Watch('model') 
   watchModelHandler() {
@@ -299,6 +298,4 @@ export class FormComponent {
       </div>
     ]
   }
-
-  get currentState() { return this.appState.store.getState() }
 }

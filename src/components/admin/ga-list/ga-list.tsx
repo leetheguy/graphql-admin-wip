@@ -13,7 +13,6 @@ import { EventEmitter } from 'events';
 })
 export class ListComponent {
   @Prop() side: String;
-  @Prop() appState: GAState;
   @Prop() model: GAModel;
   @Watch('model') 
   watchModelHandler() { 
@@ -113,6 +112,4 @@ export class ListComponent {
       </ion-grid>
     ];
   }
-
-  get currentState() { return this.appState.store.getState() }
 }
