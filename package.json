@@ -14,7 +14,7 @@
     "test.watch": "stencil test --spec --e2e --watch"
   },
   "dependencies": {
-    "@ionic/core": "4.0.0",
+    "@ionic/core": "5.3.2",
     "axios": "^0.18.0",
     "flatpickr": "^4.5.7",
     "lodash": "^4.17.11",
